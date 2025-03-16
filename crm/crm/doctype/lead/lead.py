@@ -6,4 +6,6 @@ from frappe.model.document import Document
 
 
 class Lead(Document):
-	pass
+	def validate(self):
+		if self.has_value_changed("first_name") or self.has_value_changed("last_name"):
+			self.full_name = " ".join(filter(None, [self.first_name, self.last_name]))
