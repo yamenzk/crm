@@ -10,12 +10,12 @@ app_license = "mit"
 
 # required_apps = []
 add_to_apps_screen = [
-	{
-		"name": "crm",
-		"logo": "/assets/crm/images/logo.svg",
-		"title": "CRM",
-		"route": "/crm",
-	}
+    {
+        "name": "crm",
+        "logo": "/assets/crm/images/logo.svg",
+        "title": "CRM",
+        "route": "/app/crm",
+    }
 ]
 # Each item in the list will be shown as an app in the apps page
 # add_to_apps_screen = [
@@ -94,6 +94,7 @@ add_to_apps_screen = [
 
 # before_install = "crm.install.before_install"
 # after_install = "crm.install.after_install"
+after_migrate = "crm.install.after_migrate.after_migrate"
 
 # Uninstallation
 # ------------
@@ -243,4 +244,3 @@ add_to_apps_screen = [
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-

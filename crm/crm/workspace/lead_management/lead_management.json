@@ -1,5 +1,5 @@
 {
- "app": "CRM",
+ "app": "crm",
  "charts": [],
  "content": "[{\"id\":\"nwi2zeETRd\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">CRM</span>\",\"col\":12}},{\"id\":\"pgMCrmhajk\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"1m0burhoLR\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Lead\",\"col\":3}}]",
  "creation": "2025-03-16 20:34:47.360986",
@@ -26,7 +26,7 @@
    "type": "Link"
   }
  ],
- "modified": "2025-03-16 20:39:21.388337",
+ "modified": "2025-03-16 20:56:01.560326",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead Management",
