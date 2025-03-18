@@ -150,7 +150,7 @@ after_migrate = "crm.install.after_migrate.after_migrate"
 
 # Scheduled Tasks
 # ---------------
-
+scheduler_events = {"daily": ["crm.news_scraper.scrape_and_store_news"]}
 # scheduler_events = {
 # 	"all": [
 # 		"crm.tasks.all"

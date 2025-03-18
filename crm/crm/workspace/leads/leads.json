@@ -12,24 +12,14 @@
  "idx": 0,
  "indicator_color": "green",
  "is_hidden": 0,
- "label": "Lead Management",
+ "label": "Leads",
+ "link_to": "Lead",
  "link_type": "DocType",
- "links": [
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Leads",
-   "link_count": 0,
-   "link_to": "Lead",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  }
- ],
- "modified": "2025-03-16 21:04:54.579371",
+ "links": [],
+ "modified": "2025-03-18 19:38:09.358952",
  "modified_by": "Administrator",
  "module": "CRM",
- "name": "Lead Management",
+ "name": "Leads",
  "number_cards": [],
  "owner": "Administrator",
  "parent_page": "",
@@ -37,16 +27,7 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 23.0,
- "shortcuts": [
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Lead",
-   "link_to": "Lead",
-   "stats_filter": "[]",
-   "type": "DocType"
-  }
- ],
- "title": "Lead Management",
- "type": "Workspace"
+ "shortcuts": [],
+ "title": "Leads",
+ "type": "Link"
 }
