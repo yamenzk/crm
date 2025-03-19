@@ -9,6 +9,7 @@
   "naming_series",
   "status",
   "lead_source",
+  "not_interested",
   "column_break_spvz",
   "salutation",
   "first_name",
@@ -20,6 +21,8 @@
   "company",
   "position",
   "salary",
+  "section_break_xiaj",
+  "column_break_eljz",
   "column_break_ozsg",
   "mobile",
   "email",
@@ -130,13 +133,27 @@
   {
    "fieldname": "column_break_ozsg",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_xiaj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_eljz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "not_interested",
+   "fieldtype": "Check",
+   "label": "Not Interested"
   }
  ],
  "force_re_route_to_default_view": 1,
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-18 19:48:57.860073",
+ "modified": "2025-03-19 02:36:17.454879",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",
