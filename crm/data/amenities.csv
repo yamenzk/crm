@@ -1,0 +1,137 @@
+amenity,icon,is_project
+Swimming Pool,droplet,1
+Fitness Center/Gym,activity,1
+Concierge Service,user,1
+Security Guards,shield,1
+Lobby,home,1
+Parking Garage,car,1
+Elevator,arrow-up-down,1
+Package Reception,package,1
+Visitor Parking,truck,1
+Playground,compass,1
+Tennis Court,circle,1
+Basketball Court,circle,1
+Rooftop Terrace,sun,1
+Community Garden,flower,1
+BBQ Area,flame,1
+Pet Park,paw,1
+Bike Storage,truck,1
+Car Charging Station,battery-charging,1
+Business Center,briefcase,1
+Conference Room,users,1
+Party Room,music,1
+Yoga Studio,sunset,1
+Spa Facilities,droplet,1
+Sauna,thermometer,1
+Steam Room,cloud,1
+Jacuzzi,thermometer,1
+Movie Theater,film,1
+Game Room,target,1
+Library,book,1
+Lounge Area,coffee,1
+Laundry Facilities,wind,1
+Storage Units,box,1
+Shuttle Service,truck,1
+Doorman,user,1
+Waste Management,trash,1
+CCTV Surveillance,video,1
+Intercom System,phone,1
+Co-working Space,briefcase,1
+Children's Playroom,smile,1
+Outdoor Lounge,umbrella,1
+Private Pool,droplet,0
+Balcony,sun,0
+Terrace,sun,0
+Garden/Yard,flower,0
+Furnished,home,0
+Semi-Furnished,layout,0
+Unfurnished,square,0
+Air Conditioning,wind,0
+Central Heating,thermometer,0
+Fireplace,flame,0
+Walk-in Closet,archive,0
+En-suite Bathroom,droplet,0
+Guest Bathroom,users,0
+Open Kitchen,coffee,0
+Kitchen Island,square,0
+Breakfast Bar,coffee,0
+Granite Countertops,square,0
+Stainless Steel Appliances,tool,0
+Dishwasher,droplet,0
+Microwave,box,0
+Refrigerator,square,0
+Oven/Stove,thermometer,0
+Washer/Dryer,wind,0
+Hardwood Floors,square,0
+Tile Floors,grid,0
+Carpet Floors,square,0
+High Ceilings,maximize-2,0
+Recessed Lighting,sun,0
+Ceiling Fan,wind,0
+Natural Light,sun,0
+Sound System,volume-2,0
+Smart Home Features,cpu,0
+Security Alarm,bell,0
+Private Entrance,log-in,0
+Patio,sun,0
+Deck,layers,0
+BBQ Grill,flame,0
+Fire Pit,flame,0
+Hot Tub,thermometer,0
+Sauna (Private),thermometer,0
+Wine Cellar,bottle,0
+Home Office,briefcase,0
+Media Room,tv,0
+Game Room (Private),target,0
+Gym (Private),activity,0
+Storage Room,box,0
+Pantry,package,0
+Mudroom,home,0
+Laundry Room,wind,0
+Skylight,sun,0
+Bay Window,maximize-2,0
+Walk-in Shower,droplet,0
+Bathtub,droplet,0
+Double Vanity,divide,0
+Heated Floors,thermometer,0
+Bidet,droplet,0
+Smart Toilet,settings,0
+Solar Panels,sun,0
+Energy Efficient Windows,maximize-2,0
+Insulation,layers,0
+Wheelchair Accessible,user,0
+No Stairs,minus,0
+Wide Doorways,maximize-2,0
+Grab Bars,minus,0
+Low Countertops,minus,0
+City View,eye,0
+Mountain View,triangle,0
+Ocean View,droplet,0
+Lake View,droplet,0
+Park View,tree,0
+Garden View,flower,0
+Courtyard View,square,0
+Landmark View,flag,0
+Corner Unit,corner-up-left,0
+Penthouse,arrow-up,0
+Ground Floor,arrow-down,0
+Top Floor,arrow-up,0
+Quiet Street,volume-x,0
+Cul-de-sac,refresh-cw,0
+Gated Community,lock,0
+Pet Friendly,heart,0
+No Pets Allowed,slash,0
+Smoking Allowed,wind,0
+Non-smoking,slash,0
+Utilities Included,check,0
+Internet Included,wifi,0
+Cable TV Included,tv,0
+Garage,truck,0
+Carport,umbrella,0
+Driveway,minus,0
+Street Parking,truck,0
+Electric Vehicle Charging,battery-charging,0
+Bike Storage (Private),truck,0
+Storage Shed,box,0
+Attic,triangle,0
+Basement,arrow-down,0

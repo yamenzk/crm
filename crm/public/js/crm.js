@@ -19,9 +19,11 @@ $(document).on("page-change", function () {
 	}
 });
 if (!window.feather) {
-	$.ajax({
-		url: "https://unpkg.com/feather-icons/dist/feather.min.js",
-		dataType: "script",
-		cache: true,
-	});
+	const script = document.createElement("script");
+	script.src = "https://unpkg.com/feather-icons/dist/feather.min.js";
+	script.onload = function () {
+		// Initialize feather icons once loaded
+		feather.replace();
+	};
+	document.head.appendChild(script);
 }

@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-19 19:37:54.623460",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "unit_number",
+  "building",
+  "lat",
+  "lng",
+  "bedrooms",
+  "availability"
+ ],
+ "fields": [
+  {
+   "fieldname": "unit_number",
+   "fieldtype": "Data",
+   "label": "Unit Number"
+  },
+  {
+   "fieldname": "building",
+   "fieldtype": "Data",
+   "label": "Building"
+  },
+  {
+   "fieldname": "lat",
+   "fieldtype": "Float",
+   "label": "Lat"
+  },
+  {
+   "fieldname": "lng",
+   "fieldtype": "Float",
+   "label": "Lng"
+  },
+  {
+   "fieldname": "bedrooms",
+   "fieldtype": "Select",
+   "label": "Bedrooms",
+   "options": "\nStudio\n1-BHK\n2-BHK\n3-BHK\n4-BHK\n5-BHK\n6-BHK\n7-BHK\n7+"
+  },
+  {
+   "fieldname": "availability",
+   "fieldtype": "Select",
+   "label": "Availability",
+   "options": "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-03-19 19:40:31.355551",
+ "modified_by": "Administrator",
+ "module": "CRM",
+ "name": "Units",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

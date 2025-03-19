@@ -1,246 +1,143 @@
-/**
- * Setup Lead Kanban view with all required functionality
- */
-window.setupLeadKanban = function () {
-	$.getScript("/assets/crm/js/common/loading_overlay.js", function () {
-		// showLoadingOverlay("Loading CRM Kanban");
-
-		frappe.require(
-			[
-				"/assets/crm/js/common/realtime.js",
-				"/assets/crm/js/common/context_menu.js",
-				"/assets/crm/js/lead_kanban/context_menu.js",
-				"/assets/crm/js/lead_kanban/not_interested_dialog.js",
-			],
-			function () {
-				const featherPromise = new Promise((resolve) => {
-					if (window.feather) {
-						resolve();
-					} else {
-						$.ajax({
-							url: "https://unpkg.com/feather-icons/dist/feather.min.js",
-							dataType: "script",
-							cache: true,
-							success: resolve,
-						});
-					}
-				});
-
-				featherPromise.then(() => {
-					setupKanbanView();
-
-					setupKanbanRefreshObserver();
-
-					setupRealtimeUpdates("Lead", defaultListRefresh);
-
-					addCustomActionButtons();
-
-					// hideLoadingOverlay();
-				});
-			}
-		);
-	});
-};
-
-/**
- * Apply customizations to the Kanban view
- */
-function setupKanbanView() {
-	applyKanbanCSS();
-
-	$(".add-card").remove();
-	$(".avatar-small .avatar-frame.avatar-action").closest(".avatar-small").remove();
-
-	addContextMenuToKanbanCards();
-
-	hideMenuForNonAdmins();
-}
-
-/**
- * Apply CSS to immediately hide unwanted elements
- */
-function applyKanbanCSS() {
-	$("#crm-kanban-style").remove();
-
-	const isSystemManager = frappe.user.has_role("System Manager");
-	const isCRMManager = frappe.user.has_role("CRM Manager");
-
-	const menuCss = !isSystemManager
-		? `
-        .menu-btn-group {
-            display: none !important;
-        }
-        `
-		: "";
-
-	const columnOptionsCss = !isCRMManager
-		? `
-        .kanban-column-header .column-options {
-            display: none !important;
-        }
-        `
-		: "";
-
-	const styleElement = $(`
-        <style id="crm-kanban-style">
-            .kanban .add-card,
-            .kanban .avatar-small .avatar-frame.avatar-action {
-                display: none !important;
-            }
-            ${menuCss}
-            ${columnOptionsCss}
-        </style>
-    `);
-
-	$("head").append(styleElement);
-}
-
-/**
- * Hide the menu button for non-admin users
- */
-function hideMenuForNonAdmins() {
-	if (!frappe.user.has_role("System Manager")) {
-		$(".menu-btn-group").hide();
-	}
-
-	if (!frappe.user.has_role("CRM Manager")) {
-		$(".kanban-column-header .column-options").hide();
-	}
-}
-
-/**
- * Sets up an observer to reapply customizations after Kanban refreshes
- */
-function setupKanbanRefreshObserver() {
-	if (window.kanbanRefreshObserver) {
-		window.kanbanRefreshObserver.disconnect();
-	}
-
-	window.kanbanRefreshObserver = new MutationObserver((mutations) => {
-		for (const mutation of mutations) {
-			if (mutation.type === "childList" && mutation.addedNodes.length) {
-				const addedNodes = Array.from(mutation.addedNodes);
-
-				const cardAdded = addedNodes.some(
-					(node) =>
-						$(node).hasClass("kanban-card-wrapper") ||
-						$(node).find(".kanban-card-wrapper").length
-				);
-
-				const buttonAdded = addedNodes.some(
-					(node) =>
-						$(node).hasClass("add-card") ||
-						$(node).find(".add-card").length ||
-						$(node).find(".avatar-small .avatar-frame.avatar-action").length
-				);
-
-				const menuAdded = addedNodes.some(
-					(node) =>
-						$(node).hasClass("standard-actions") ||
-						$(node).find(".standard-actions").length ||
-						$(node).find(".menu-btn-group").length
-				);
-
-				if (cardAdded || buttonAdded || menuAdded) {
-					setupKanbanView();
-
-					addCustomActionButtons();
-				}
-			}
-		}
-	});
-
-	const kanbanContainer = $(".kanban");
-	if (kanbanContainer.length) {
-		window.kanbanRefreshObserver.observe(kanbanContainer[0], {
-			childList: true,
-			subtree: true,
-		});
-	}
-
-	const pageActions = $(".page-actions");
-	if (pageActions.length) {
-		window.kanbanRefreshObserver.observe(pageActions[0], {
-			childList: true,
-			subtree: true,
-		});
-	}
-
-	if (cur_list && typeof cur_list.refresh === "function" && !cur_list.refresh.__crm_patched) {
-		const originalRefresh = cur_list.refresh;
-
-		const patchedRefresh = function (...args) {
-			applyKanbanCSS();
-
-			const result = originalRefresh.apply(this, args);
-
-			requestAnimationFrame(() => {
-				setupKanbanView();
-				addCustomActionButtons();
+frappe.listview_settings["Amenity"] = {
+	page_length: 50,
+	refresh: function (listview) {
+		// Add the "Install Common Amenities" button
+		listview.page.add_inner_button("Install Common Amenities", function () {
+			frappe.msgprint({
+				title: __("Import Amenities"),
+				message: __(
+					"Are you sure you want to import common amenities? This will create amenity records from the default list."
+				),
+				primary_action: {
+					label: __("Proceed"),
+					server_action: "crm.crm.doctype.amenity.amenity.import_common_amenities",
+					args: {},
+				},
 			});
+		});
 
-			return result;
-		};
+		// Add toggle view button
+		this.setupTagView(listview);
+	},
 
-		patchedRefresh.__crm_patched = true;
-		patchedRefresh.__original = originalRefresh;
+	setupTagView: function (listview) {
+		// Create toggle button with icon only
+		const $toggleButton = $(`
+			<button class="btn btn-default btn-sm toggle-view-button" title="Toggle Tag View">
+				<svg class="icon icon-sm">
+					<use href="#icon-tag"></use>
+				</svg>
+			</button>
+		`);
 
-		cur_list.refresh = patchedRefresh;
-	}
-}
+		// Insert button before the standard actions buttons
+		listview.page.custom_actions.prepend($toggleButton);
 
-/**
- * Add custom action buttons to the page
- */
-function addCustomActionButtons() {
-	// Remove existing button to prevent duplicates
-	$('.custom-action-btn[data-action="view-not-interested"]').remove();
+		// Create tag view container
+		const $tagViewContainer = $(`
+			<div class="amenity-tag-view" style="display: none; padding: 15px 0;">
+				<div class="amenity-tags-container" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+			</div>
+		`).insertBefore(listview.$result);
 
-	const $primaryActionBtn = $(".primary-action");
+		// Add custom CSS for tag styling
+		$(`<style>
+			.amenity-tag {
+				display: inline-flex;
+				align-items: center;
+				padding: 8px 15px;
+				border-radius: 6px;
+				background-color: var(--control-bg);
+				border: 1px solid var(--border-color);
+				cursor: pointer;
+				transition: all 0.2s;
+				box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+			}
+			.amenity-tag:hover {
+				box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+				transform: translateY(-2px);
+				background-color: var(--fg-hover-color);
+			}
+			.amenity-tag-icon {
+				margin-right: 8px;
+			}
+			.amenity-tag-label {
+				font-weight: 500;
+			}
+		</style>`).appendTo("head");
 
-	const $notInterestedBtn = $(`
-        <button class="btn btn-default btn-sm custom-action-btn" data-action="view-not-interested">
-            <i data-feather="user-x" class="icon-sm"></i>
-        </button>
-    `);
+		// Toggle between list view and tag view on button click
+		let isTagView = true; // Start with tag view as default
+		this.toggleView(listview, isTagView, $tagViewContainer);
 
-	if ($primaryActionBtn.length) {
-		$notInterestedBtn.insertBefore($primaryActionBtn);
-	} else {
-		$(".page-actions").append($notInterestedBtn);
-	}
+		$toggleButton.on(
+			"click",
+			function () {
+				isTagView = !isTagView;
+				this.toggleView(listview, isTagView, $tagViewContainer);
+			}.bind(this)
+		);
 
-	if (window.feather) {
-		feather.replace();
-	}
+		// Initial load of tags
+		this.loadTags($tagViewContainer.find(".amenity-tags-container"));
+	},
 
-	// Always reattach the event handler
-	$("body").off("click", '.custom-action-btn[data-action="view-not-interested"]');
-	$("body").on(
-		"click",
-		'.custom-action-btn[data-action="view-not-interested"]',
-		showNotInterestedLeadsDialog
-	);
-}
+	toggleView: function (listview, showTagView, $tagViewContainer) {
+		if (showTagView) {
+			listview.$result.hide();
+			$(".list-paging-area").hide();
+			$tagViewContainer.show();
+			// Load tags if container is empty
+			if ($tagViewContainer.find(".amenity-tags-container").children().length === 0) {
+				this.loadTags($tagViewContainer.find(".amenity-tags-container"));
+			}
+		} else {
+			listview.$result.show();
+			$(".list-paging-area").show();
+			$tagViewContainer.hide();
+		}
+	},
 
-/**
- * Clean up Lead Kanban resources
- */
-window.cleanupLeadKanban = function () {
-	if (window.unsubscribeFromAllRealtimeUpdates) {
-		unsubscribeFromAllRealtimeUpdates();
-	}
+	loadTags: function ($container) {
+		$container.empty().append('<div class="text-muted">Loading amenities...</div>');
 
-	if (window.kanbanRefreshObserver) {
-		window.kanbanRefreshObserver.disconnect();
-		window.kanbanRefreshObserver = null;
-	}
+		// Fetch all amenities
+		frappe.call({
+			method: "frappe.client.get_list",
+			args: {
+				doctype: "Amenity",
+				fields: ["name", "amenity", "icon"],
+				limit: 0,
+			},
+			callback: function (r) {
+				$container.empty();
 
-	if (cur_list && cur_list.refresh && cur_list.refresh.__original) {
-		cur_list.refresh = cur_list.refresh.__original;
-	}
+				if (r.message && r.message.length) {
+					r.message.forEach(function (doc) {
+						const $tag = $(`
+							<div class="amenity-tag" data-name="${doc.name}">
+								<div class="amenity-tag-icon">
+									${doc.icon ? `<i data-feather="${doc.icon}"></i>` : ""}
+								</div>
+								<span class="amenity-tag-label">${doc.amenity || doc.name}</span>
+							</div>
+						`);
 
-	$("#crm-kanban-style").remove();
+						$tag.on("click", function () {
+							frappe.set_route("Form", "Amenity", doc.name);
+						});
 
-	$(".custom-action-btn").remove();
+						$container.append($tag);
+					});
+
+					// Replace Feather icons
+					if (window.feather) {
+						feather.replace();
+					}
+				} else {
+					$container.html('<div class="text-muted">No amenities found</div>');
+				}
+			},
+		});
+	},
 };

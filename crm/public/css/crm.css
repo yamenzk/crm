@@ -2,5 +2,5 @@
 /* Import component styles */
 @import "components/context_menu.css";
 @import "components/loading_overlay.css";
-
+@import "amenity_tags.css";
 /* Add any global styles below */
