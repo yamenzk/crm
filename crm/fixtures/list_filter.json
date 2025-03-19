@@ -1,0 +1,22 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "List Filter",
+  "filter_name": "Project Amenities",
+  "filters": "[[\"Amenity\",\"is_project\",\"=\",1,false]]",
+  "for_user": "",
+  "modified": "2025-03-20 03:24:12.581196",
+  "name": "d8td6o5t5f",
+  "reference_doctype": "Amenity"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "List Filter",
+  "filter_name": "Listing Amenities",
+  "filters": "[[\"Amenity\",\"is_project\",\"=\",0,false]]",
+  "for_user": "",
+  "modified": "2025-03-20 03:24:29.754742",
+  "name": "de9esq19jj",
+  "reference_doctype": "Amenity"
+ }
+]

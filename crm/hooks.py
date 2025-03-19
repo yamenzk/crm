@@ -8,6 +8,20 @@ app_license = "mit"
 # Apps
 # ------------------
 
+fixtures = [
+    {
+        "dt": "List Filter",
+        "filters": [
+            ["name", "in", ["de9esq19jj", "d8td6o5t5f"]],
+        ],
+    },
+    {
+        "dt": "Kanban Board",
+        "filters": [
+            ["name", "=", "Leads"],
+        ],
+    }
+]
 # required_apps = []
 add_to_apps_screen = [
     {

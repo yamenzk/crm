@@ -1,0 +1,71 @@
+[
+ {
+  "columns": [
+   {
+    "column_name": "New",
+    "indicator": "Gray",
+    "order": "[]",
+    "status": "Active"
+   },
+   {
+    "column_name": "Connected",
+    "indicator": "Blue",
+    "order": "[\"DY-LEAD-00001\"]",
+    "status": "Active"
+   },
+   {
+    "column_name": "Qualified",
+    "indicator": "Cyan",
+    "order": "[]",
+    "status": "Active"
+   },
+   {
+    "column_name": "Nurturing",
+    "indicator": "Yellow",
+    "order": "[]",
+    "status": "Active"
+   },
+   {
+    "column_name": "Offer Made",
+    "indicator": "Pink",
+    "order": "[]",
+    "status": "Active"
+   },
+   {
+    "column_name": "Under Contract",
+    "indicator": "Purple",
+    "order": "[]",
+    "status": "Active"
+   },
+   {
+    "column_name": "Closed",
+    "indicator": "Green",
+    "order": "[]",
+    "status": "Active"
+   },
+   {
+    "column_name": "Lost",
+    "indicator": "Red",
+    "order": "[]",
+    "status": "Active"
+   },
+   {
+    "column_name": "Inactive",
+    "indicator": "Gray",
+    "order": "[]",
+    "status": "Active"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Kanban Board",
+  "field_name": "status",
+  "fields": "[\"mobile\"]",
+  "filters": "[[\"Lead\",\"not_interested\",\"=\",0,false]]",
+  "kanban_board_name": "Leads",
+  "modified": "2025-03-20 03:19:51.152371",
+  "name": "Leads",
+  "private": 0,
+  "reference_doctype": "Lead",
+  "show_labels": 0
+ }
+]

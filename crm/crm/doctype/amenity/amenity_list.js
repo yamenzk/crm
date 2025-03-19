@@ -138,12 +138,6 @@ frappe.listview_settings["Amenity"] = {
 			order_by = listview.sort_selector.get_sql_string();
 		}
 
-		// Add search filter if present
-		const searchValue = $(listview.page.page_form).find('input[data-fieldname="name"]').val();
-		if (searchValue) {
-			filters.push(["name", "like", "%" + searchValue + "%"]);
-		}
-
 		frappe.call({
 			method: "frappe.desk.reportview.get",
 			args: {
