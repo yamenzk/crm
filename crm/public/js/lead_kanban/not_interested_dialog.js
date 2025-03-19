@@ -6,19 +6,16 @@
  * Shows a dialog with all leads marked as "Not Interested"
  */
 function showNotInterestedLeadsDialog() {
-	// showLoadingOverlay("Loading Not Interested Leads");
 	frappe.db
 		.get_list("Lead", {
 			filters: {
 				not_interested: 1,
 			},
-			fields: ["name", "full_name", "company", "email", "mobile", "status", "modified"],
+			fields: ["name", "full_name", "mobile", "modified"],
 			limit: 100,
 			order_by: "modified desc",
 		})
 		.then((leads) => {
-			hideLoadingOverlay();
-
 			if (leads.length === 0) {
 				frappe.msgprint({
 					title: __("No Not Interested Leads"),
@@ -33,39 +30,88 @@ function showNotInterestedLeadsDialog() {
 					fieldtype: "HTML",
 					fieldname: "leads_html",
 					options: `
-					<div class="not-interested-leads-container" style="max-height: 400px; overflow-y: auto;">
-						<table class="table table-bordered" style="cursor: pointer;">
-							<thead>
-								<tr>
-									<th style="width: 30px;">
-										<input type="checkbox" class="select-all-leads">
-									</th>
-									<th>${__("Lead Name")}</th>
-									<th>${__("Company")}</th>
-									<th>${__("Email")}</th>
-									<th>${__("Mobile")}</th>
-									<th>${__("Last Updated")}</th>
-								</tr>
-							</thead>
-							<tbody>
-								${leads
-									.map(
-										(lead) => `
-									<tr data-name="${lead.name}">
-										<td><input type="checkbox" class="lead-check" data-name="${lead.name}"></td>
-										<td>${lead.full_name || ""}</td>
-										<td>${lead.company || ""}</td>
-										<td>${lead.email || ""}</td>
-										<td>${lead.mobile || ""}</td>
-										<td>${frappe.datetime.prettyDate(lead.modified)}</td>
-									</tr>
-								`
-									)
-									.join("")}
-							</tbody>
-						</table>
-					</div>
-				`,
+          <div class="ni-leads-container">
+            <table class="ni-leads-table">
+              <thead>
+                <tr>
+                  <th class="ni-leads-checkbox-col">
+                    <input type="checkbox" class="ni-leads-select-all">
+                  </th>
+                  <th class="ni-leads-name-col">${__("Lead Name")}</th>
+                  <th class="ni-leads-mobile-col">${__("Mobile")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${leads
+					.map(
+						(lead) => `
+                  <tr class="ni-leads-row" data-name="${lead.name}">
+                    <td><input type="checkbox" class="ni-leads-check" data-name="${
+						lead.name
+					}"></td>
+                    <td>${lead.full_name || ""}</td>
+                    <td>${lead.mobile || ""}</td>
+                  </tr>
+                `
+					)
+					.join("")}
+              </tbody>
+            </table>
+          </div>
+          <style>
+            .ni-leads-container {
+              max-height: 400px;
+              overflow-y: auto;
+              border-radius: var(--border-radius-md);
+              border: 1px solid var(--border-color);
+            }
+            .ni-leads-table {
+              width: 100%;
+              border-collapse: collapse;
+              font-family: var(--font-stack);
+            }
+            .ni-leads-table th {
+              background-color: var(--control-bg);
+              color: var(--text-color);
+              font-weight: var(--weight-bold);
+              padding: var(--padding-sm);
+              text-align: left;
+              position: sticky;
+              top: 0;
+              z-index: 1;
+            }
+            .ni-leads-checkbox-col {
+              width: 40px;
+              text-align: center;
+            }
+            .ni-leads-name-col {
+              width: 60%;
+            }
+            .ni-leads-mobile-col {
+              width: 40%;
+            }
+            .ni-leads-row {
+              cursor: pointer;
+              transition: background-color 0.2s;
+            }
+            .ni-leads-row:hover {
+              background-color: var(--control-bg-on-hover);
+            }
+            .ni-leads-row td {
+              padding: var(--padding-sm);
+              border-bottom: 1px solid var(--border-color);
+            }
+            .ni-leads-row:last-child td {
+              border-bottom: none;
+            }
+            .ni-leads-select-all, .ni-leads-check {
+              cursor: pointer;
+              width: 16px;
+              height: 16px;
+              accent-color: var(--primary);
+            }
+          </style>
+        `,
 				},
 			];
 
@@ -73,22 +119,22 @@ function showNotInterestedLeadsDialog() {
 			const dialog = new frappe.ui.Dialog({
 				title: __("Not Interested Leads"),
 				fields: dialogFields,
-				size: "large", 
-				primary_action_label: __("Restore Selected Leads"),
+				size: "medium",
+				primary_action_label: __("Restore Selected"),
 				primary_action: function () {
 					restoreSelectedLeads(dialog);
 				},
 			});
 
 			dialog.onshow = function () {
-				dialog.$wrapper.find(".select-all-leads").on("change", function () {
+				dialog.$wrapper.find(".ni-leads-select-all").on("change", function () {
 					const checked = $(this).prop("checked");
-					dialog.$wrapper.find(".lead-check").prop("checked", checked);
+					dialog.$wrapper.find(".ni-leads-check").prop("checked", checked);
 				});
 
-				dialog.$wrapper.find("tbody tr").on("click", function (e) {
+				dialog.$wrapper.find(".ni-leads-row").on("click", function (e) {
 					if (!$(e.target).is('input[type="checkbox"]')) {
-						const $checkbox = $(this).find(".lead-check");
+						const $checkbox = $(this).find(".ni-leads-check");
 						$checkbox.prop("checked", !$checkbox.prop("checked"));
 					}
 				});
@@ -97,7 +143,6 @@ function showNotInterestedLeadsDialog() {
 			dialog.show();
 		})
 		.catch((err) => {
-			// hideLoadingOverlay();
 			console.error("Error fetching not interested leads:", err);
 			frappe.msgprint({
 				title: __("Error"),
@@ -115,7 +160,7 @@ function showNotInterestedLeadsDialog() {
 function restoreSelectedLeads(dialog) {
 	const selectedLeads = [];
 
-	dialog.$wrapper.find(".lead-check:checked").each(function () {
+	dialog.$wrapper.find(".ni-leads-check:checked").each(function () {
 		selectedLeads.push($(this).data("name"));
 	});
 
@@ -129,7 +174,6 @@ function restoreSelectedLeads(dialog) {
 	}
 
 	dialog.hide();
-	// showLoadingOverlay(`Restoring ${selectedLeads.length} leads...`);
 
 	const promises = selectedLeads.map((leadName) => {
 		return frappe.db.set_value("Lead", leadName, {
@@ -140,8 +184,6 @@ function restoreSelectedLeads(dialog) {
 
 	Promise.all(promises)
 		.then(() => {
-			// hideLoadingOverlay();
-
 			frappe.show_alert({
 				message: __(`Successfully restored ${selectedLeads.length} leads`),
 				indicator: "green",
@@ -150,8 +192,6 @@ function restoreSelectedLeads(dialog) {
 			cur_list.refresh();
 		})
 		.catch((err) => {
-			hideLoadingOverlay();
-
 			console.error("Error restoring leads:", err);
 			frappe.msgprint({
 				title: __("Error"),
