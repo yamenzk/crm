@@ -323,22 +323,33 @@ class GoogleNewsScraper:
             return {}
 
     def scrape(self):
+        # Check if the search term is in Arabic to add proper language/region parameters
+        if self.config.get("searchTerm") and any('\u0600' <= c <= '\u06FF' for c in self.config["searchTerm"]):
+            # Arabic character range check
+            print(f"Arabic search term detected: {self.config['searchTerm']}")
+            query_vars = self.config.get("queryVars", {}).copy()
+            # Add Arabic language and UAE region codes
+            query_vars["hl"] = "ar"  # Arabic language
+            query_vars["gl"] = "AE"  # UAE region code
+            query_vars["ceid"] = "AE:ar"  # Country edition ID
+            self.config["queryVars"] = query_vars
+        
         # Get source website URLs from RSS if enabled
         source_info = {}
         if self.config["useRSS"]:
             source_info = self._get_source_info_from_rss()
-
+        
         # Setup query parameters for HTML scraping
         query_vars = self.config.get("queryVars", {}).copy()
         query_vars["when"] = self.config["timeframe"]
-
+        
         if "searchTerm" in self.config:
             query_vars["q"] = self.config["searchTerm"]
-
+        
         query_string = self._build_query_string(query_vars)
         base_url = "https://news.google.com/search"
         url = f"{base_url}{query_string}"
-
+        
         print(f"Scraping news from HTML: {url}")
 
         try:
