@@ -17,7 +17,10 @@
   "column_break_iesz",
   "mobile",
   "email",
-  "contact"
+  "contact",
+  "column_break_lfbu",
+  "lead_teamleader",
+  "lead_owner"
  ],
  "fields": [
   {
@@ -103,12 +106,28 @@
    "label": "Contact",
    "options": "Contact",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_lfbu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lead_teamleader",
+   "fieldtype": "Link",
+   "label": "Lead Teamleader",
+   "options": "User"
+  },
+  {
+   "fieldname": "lead_owner",
+   "fieldtype": "Link",
+   "label": "Lead Owner",
+   "options": "User"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 21:16:33.805906",
+ "modified": "2025-03-25 22:38:32.911978",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",
@@ -182,6 +201,16 @@
    "report": 1,
    "role": "CRM Reception",
    "share": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "CRM Sales",
+   "share": 1,
+   "write": 1
   }
  ],
  "quick_entry": 1,

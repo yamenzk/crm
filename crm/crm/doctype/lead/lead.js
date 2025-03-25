@@ -1,5 +1,7 @@
 frappe.ui.form.on("Lead", {
-	refresh(frm) {},
+	refresh(frm) {
+		$(".form-assignments").hide();
+	},
 	first_name: function (frm) {
 		frm.set_value(
 			"full_name",
@@ -13,4 +15,3 @@ frappe.ui.form.on("Lead", {
 		);
 	},
 });
-

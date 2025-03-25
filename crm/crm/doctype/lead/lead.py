@@ -11,6 +11,25 @@ class Lead(Document):
         frappe.publish_realtime(
             "lead_update", {"lead": self.as_dict()}, after_commit=True
         )
+        if self.has_value_changed('lead_owner') and not self.is_new():
+            frappe.share.add(
+                doctype="Contact",
+                name=self.contact,
+                user=self.lead_owner,
+                read=1,
+                write=1,
+                share=0,
+                notify=0,
+            )
+            frappe.share.add(
+                doctype="Lead",
+                name=self.name,
+                user=self.lead_owner,
+                read=1,
+                write=1,
+                share=0,
+                notify=1,
+            )
 
     def on_trash(self):
         frappe.publish_realtime(
@@ -61,4 +80,3 @@ class Lead(Document):
     def validate(self):
         if self.has_value_changed("first_name") or self.has_value_changed("last_name") and not self.is_new():
             self.full_name = " ".join(filter(None, [self.first_name, self.last_name]))
-

@@ -23,7 +23,7 @@ fixtures = [
     },
     {
         "dt": "Bedroom"
-    }
+    },
 ]
 # required_apps = []
 add_to_apps_screen = [
@@ -165,6 +165,7 @@ after_migrate = "crm.install.after_migrate.after_migrate"
 # 		"on_trash": "method"
 # 	}
 # }
+
 
 # Scheduled Tasks
 # ---------------
