@@ -10,7 +10,7 @@
    {
     "column_name": "Connected",
     "indicator": "Blue",
-    "order": "[\"DY-LEAD-00001\"]",
+    "order": "[]",
     "status": "Active"
    },
    {
@@ -62,7 +62,7 @@
   "fields": "[\"mobile\"]",
   "filters": "[[\"Lead\",\"not_interested\",\"=\",0,false]]",
   "kanban_board_name": "Leads",
-  "modified": "2025-03-20 03:19:51.152371",
+  "modified": "2025-03-25 17:08:02.619901",
   "name": "Leads",
   "private": 0,
   "reference_doctype": "Lead",

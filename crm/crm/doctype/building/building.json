@@ -1,0 +1,97 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2025-03-25 17:29:38.886891",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "building_id",
+  "amenities",
+  "naming_series",
+  "column_break_dotu",
+  "project",
+  "developer",
+  "column_break_gror",
+  "lat",
+  "lng"
+ ],
+ "fields": [
+  {
+   "fieldname": "building_id",
+   "fieldtype": "Data",
+   "label": "Building ID",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_gror",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "lat",
+   "fieldtype": "Data",
+   "label": "Lat"
+  },
+  {
+   "fieldname": "lng",
+   "fieldtype": "Data",
+   "label": "Lng"
+  },
+  {
+   "fieldname": "amenities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Amenities",
+   "options": "Amenities"
+  },
+  {
+   "fieldname": "column_break_dotu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Project",
+   "options": "Project"
+  },
+  {
+   "fieldname": "developer",
+   "fieldtype": "Link",
+   "label": "Developer",
+   "options": "Developer"
+  },
+  {
+   "default": "DY-BLDG-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "hidden": 1,
+   "label": "Naming Series",
+   "options": "DY-BLDG-"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-25 17:34:07.410476",
+ "modified_by": "Administrator",
+ "module": "CRM",
+ "name": "Building",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

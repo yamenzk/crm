@@ -1,0 +1,58 @@
+[
+ {
+  "bedroom": "1-BHK",
+  "docstatus": 0,
+  "doctype": "Bedroom",
+  "modified": "2025-03-25 17:42:36.912491",
+  "name": "1-BHK"
+ },
+ {
+  "bedroom": "2-BHK",
+  "docstatus": 0,
+  "doctype": "Bedroom",
+  "modified": "2025-03-25 17:42:41.420129",
+  "name": "2-BHK"
+ },
+ {
+  "bedroom": "3-BHK",
+  "docstatus": 0,
+  "doctype": "Bedroom",
+  "modified": "2025-03-25 17:42:47.264577",
+  "name": "3-BHK"
+ },
+ {
+  "bedroom": "4-BHK",
+  "docstatus": 0,
+  "doctype": "Bedroom",
+  "modified": "2025-03-25 17:42:51.068508",
+  "name": "4-BHK"
+ },
+ {
+  "bedroom": "5-BHK",
+  "docstatus": 0,
+  "doctype": "Bedroom",
+  "modified": "2025-03-25 17:42:54.972295",
+  "name": "5-BHK"
+ },
+ {
+  "bedroom": "6-BHK",
+  "docstatus": 0,
+  "doctype": "Bedroom",
+  "modified": "2025-03-25 17:42:59.836097",
+  "name": "6-BHK"
+ },
+ {
+  "bedroom": "7-BHK",
+  "docstatus": 0,
+  "doctype": "Bedroom",
+  "modified": "2025-03-25 17:43:04.138846",
+  "name": "7-BHK"
+ },
+ {
+  "bedroom": "STUDIO",
+  "docstatus": 0,
+  "doctype": "Bedroom",
+  "modified": "2025-03-25 17:43:08.485730",
+  "name": "STUDIO"
+ }
+]

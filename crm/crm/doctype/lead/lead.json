@@ -149,11 +149,10 @@
    "label": "Not Interested"
   }
  ],
- "force_re_route_to_default_view": 1,
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-19 02:36:17.454879",
+ "modified": "2025-03-25 17:06:41.540916",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",

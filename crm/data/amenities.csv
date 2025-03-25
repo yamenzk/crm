@@ -4,17 +4,17 @@ Fitness Center/Gym,activity,1
 Concierge Service,user,1
 Security Guards,shield,1
 Lobby,home,1
-Parking Garage,car,1
-Elevator,arrow-up-down,1
+Parking Garage,airplay,1
+Elevator,columns,1
 Package Reception,package,1
 Visitor Parking,truck,1
 Playground,compass,1
 Tennis Court,circle,1
 Basketball Court,circle,1
 Rooftop Terrace,sun,1
-Community Garden,flower,1
-BBQ Area,flame,1
-Pet Park,paw,1
+Community Garden,feather,1
+BBQ Area,triangle,1
+Pet Park,github,1
 Bike Storage,truck,1
 Car Charging Station,battery-charging,1
 Business Center,briefcase,1
@@ -42,13 +42,13 @@ Outdoor Lounge,umbrella,1
 Private Pool,droplet,0
 Balcony,sun,0
 Terrace,sun,0
-Garden/Yard,flower,0
+Garden/Yard,feather,0
 Furnished,home,0
 Semi-Furnished,layout,0
 Unfurnished,square,0
 Air Conditioning,wind,0
 Central Heating,thermometer,0
-Fireplace,flame,0
+Fireplace,triangle,0
 Walk-in Closet,archive,0
 En-suite Bathroom,droplet,0
 Guest Bathroom,users,0
@@ -75,11 +75,11 @@ Security Alarm,bell,0
 Private Entrance,log-in,0
 Patio,sun,0
 Deck,layers,0
-BBQ Grill,flame,0
-Fire Pit,flame,0
+BBQ Grill,triangle,0
+Fire Pit,triangle,0
 Hot Tub,thermometer,0
 Sauna (Private),thermometer,0
-Wine Cellar,bottle,0
+Wine Cellar,aperture,0
 Home Office,briefcase,0
 Media Room,tv,0
 Game Room (Private),target,0
@@ -108,8 +108,8 @@ City View,eye,0
 Mountain View,triangle,0
 Ocean View,droplet,0
 Lake View,droplet,0
-Park View,tree,0
-Garden View,flower,0
+Park View,feather,0
+Garden View,feather,0
 Courtyard View,square,0
 Landmark View,flag,0
 Corner Unit,corner-up-left,0
@@ -119,7 +119,7 @@ Top Floor,arrow-up,0
 Quiet Street,volume-x,0
 Cul-de-sac,refresh-cw,0
 Gated Community,lock,0
-Pet Friendly,heart,0
+Pet Friendly,github,0
 No Pets Allowed,slash,0
 Smoking Allowed,wind,0
 Non-smoking,slash,0

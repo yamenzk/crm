@@ -20,6 +20,9 @@ fixtures = [
         "filters": [
             ["name", "=", "Leads"],
         ],
+    },
+    {
+        "dt": "Bedroom"
     }
 ]
 # required_apps = []

@@ -1,0 +1,93 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-03-25 17:35:22.264460",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "building",
+  "project",
+  "developer",
+  "column_break_povg",
+  "availability",
+  "bedrooms",
+  "column_break_vbgr",
+  "unit_amenities"
+ ],
+ "fields": [
+  {
+   "fieldname": "building",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Building",
+   "options": "Building",
+   "reqd": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Project",
+   "options": "Project",
+   "reqd": 1
+  },
+  {
+   "fieldname": "developer",
+   "fieldtype": "Link",
+   "label": "Developer",
+   "options": "Developer"
+  },
+  {
+   "fieldname": "column_break_povg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "availability",
+   "fieldtype": "Select",
+   "label": "Availability",
+   "options": "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent"
+  },
+  {
+   "fieldname": "bedrooms",
+   "fieldtype": "Link",
+   "label": "Bedrooms",
+   "options": "Bedroom"
+  },
+  {
+   "fieldname": "column_break_vbgr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "unit_amenities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Unit Amenities",
+   "options": "Amenities"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-03-25 17:46:50.232030",
+ "modified_by": "Administrator",
+ "module": "CRM",
+ "name": "Unit",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}

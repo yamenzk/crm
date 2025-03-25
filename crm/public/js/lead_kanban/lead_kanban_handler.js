@@ -81,6 +81,8 @@ function applyKanbanCSS() {
         `
 		: "";
 
+	
+
 	const styleElement = $(`
         <style id="crm-kanban-style">
             .kanban .add-card,
@@ -89,6 +91,7 @@ function applyKanbanCSS() {
             }
             ${menuCss}
             ${columnOptionsCss}
+            ${viewButtonsCss}
         </style>
     `);
 
@@ -99,11 +102,14 @@ function applyKanbanCSS() {
  * Hide the menu button for non-admin users
  */
 function hideMenuForNonAdmins() {
-	if (!frappe.user.has_role("System Manager")) {
+	const isSystemManager = frappe.user.has_role("System Manager");
+	const isCRMManager = frappe.user.has_role("CRM Manager");
+
+	if (!isSystemManager) {
 		$(".menu-btn-group").hide();
 	}
 
-	if (!frappe.user.has_role("CRM Manager")) {
+	if (!isCRMManager) {
 		$(".kanban-column-header .column-options").hide();
 	}
 }

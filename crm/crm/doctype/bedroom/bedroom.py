@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class Units(Document):
+class Bedroom(Document):
 	pass
