@@ -91,7 +91,6 @@ function applyKanbanCSS() {
             }
             ${menuCss}
             ${columnOptionsCss}
-            ${viewButtonsCss}
         </style>
     `);
 

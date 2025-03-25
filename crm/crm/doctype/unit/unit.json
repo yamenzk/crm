@@ -9,8 +9,10 @@
   "project",
   "developer",
   "column_break_povg",
-  "availability",
+  "status",
   "bedrooms",
+  "area_sqft",
+  "area_sqm",
   "column_break_vbgr",
   "unit_amenities"
  ],
@@ -20,18 +22,18 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Building",
-   "options": "Building",
-   "reqd": 1
+   "options": "Building"
   },
   {
+   "fetch_from": "building.project",
    "fieldname": "project",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Project",
-   "options": "Project",
-   "reqd": 1
+   "options": "Project"
   },
   {
+   "fetch_from": "building.developer",
    "fieldname": "developer",
    "fieldtype": "Link",
    "label": "Developer",
@@ -40,12 +42,6 @@
   {
    "fieldname": "column_break_povg",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "availability",
-   "fieldtype": "Select",
-   "label": "Availability",
-   "options": "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent"
   },
   {
    "fieldname": "bedrooms",
@@ -62,12 +58,29 @@
    "fieldtype": "Table MultiSelect",
    "label": "Unit Amenities",
    "options": "Amenities"
+  },
+  {
+   "fieldname": "area_sqft",
+   "fieldtype": "Float",
+   "label": "Area SQFT"
+  },
+  {
+   "fieldname": "area_sqm",
+   "fieldtype": "Float",
+   "label": "Area SQM",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 17:46:50.232030",
+ "modified": "2025-03-25 20:16:43.947467",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Unit",
@@ -89,5 +102,22 @@
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Green",
+   "title": "Available"
+  },
+  {
+   "color": "Red",
+   "title": "Sold-out"
+  },
+  {
+   "color": "Pink",
+   "title": "Secondhand Sale"
+  },
+  {
+   "color": "Orange",
+   "title": "Secondhand Rent"
+  }
+ ]
 }

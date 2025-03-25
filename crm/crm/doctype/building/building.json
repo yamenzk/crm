@@ -6,11 +6,12 @@
  "engine": "InnoDB",
  "field_order": [
   "building_id",
-  "amenities",
+  "building_amenities",
   "naming_series",
   "column_break_dotu",
   "project",
   "developer",
+  "status",
   "column_break_gror",
   "lat",
   "lng"
@@ -37,12 +38,6 @@
    "label": "Lng"
   },
   {
-   "fieldname": "amenities",
-   "fieldtype": "Table MultiSelect",
-   "label": "Amenities",
-   "options": "Amenities"
-  },
-  {
    "fieldname": "column_break_dotu",
    "fieldtype": "Column Break"
   },
@@ -65,12 +60,24 @@
    "hidden": 1,
    "label": "Naming Series",
    "options": "DY-BLDG-"
+  },
+  {
+   "fieldname": "building_amenities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Building Amenities",
+   "options": "Amenities"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 17:34:07.410476",
+ "modified": "2025-03-25 20:16:33.859536",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Building",
@@ -93,5 +100,22 @@
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Green",
+   "title": "Available"
+  },
+  {
+   "color": "Gray",
+   "title": "Sold-out"
+  },
+  {
+   "color": "Pink",
+   "title": "Secondhand Sell"
+  },
+  {
+   "color": "Orange",
+   "title": "Secondhand Rent"
+  }
+ ]
 }

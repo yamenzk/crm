@@ -7,10 +7,12 @@
  "engine": "InnoDB",
  "field_order": [
   "project_name",
-  "column_break_wlav",
   "developer",
+  "column_break_wlav",
+  "project_amenities",
+  "amenities",
   "column_break_zwbg",
-  "availability"
+  "status"
  ],
  "fields": [
   {
@@ -34,16 +36,27 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "availability",
+   "fieldname": "status",
    "fieldtype": "Select",
-   "label": "Availability",
+   "label": "Status",
    "options": "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent"
+  },
+  {
+   "fieldname": "project_amenities",
+   "fieldtype": "Table MultiSelect",
+   "label": "Project Amenities",
+   "options": "Amenities"
+  },
+  {
+   "fieldname": "amenities",
+   "fieldtype": "Int",
+   "label": "Amenities"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-19 19:40:35.016516",
+ "modified": "2025-03-25 20:16:52.178837",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Project",
@@ -66,5 +79,22 @@
  "row_format": "Dynamic",
  "sort_field": "creation",
  "sort_order": "DESC",
- "states": []
+ "states": [
+  {
+   "color": "Green",
+   "title": "Available"
+  },
+  {
+   "color": "Gray",
+   "title": "Sold-out"
+  },
+  {
+   "color": "Pink",
+   "title": "Secondhand Sale"
+  },
+  {
+   "color": "Orange",
+   "title": "Secondhand Rent"
+  }
+ ]
 }

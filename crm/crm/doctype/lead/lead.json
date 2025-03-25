@@ -2,7 +2,7 @@
  "actions": [],
  "autoname": "naming_series:",
  "creation": "2025-03-16 20:37:01.036408",
- "default_view": "Kanban",
+ "default_view": "List",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -11,22 +11,13 @@
   "lead_source",
   "not_interested",
   "column_break_spvz",
-  "salutation",
   "first_name",
   "last_name",
   "full_name",
-  "column_break_eazn",
-  "nationality",
-  "gender",
-  "company",
-  "position",
-  "salary",
-  "section_break_xiaj",
-  "column_break_eljz",
-  "column_break_ozsg",
+  "column_break_iesz",
   "mobile",
   "email",
-  "phonebook"
+  "contact"
  ],
  "fields": [
   {
@@ -34,20 +25,16 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "First Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "salutation",
-   "fieldtype": "Link",
-   "label": "Salutation",
-   "options": "Salutation"
+   "reqd": 1,
+   "set_only_once": 1
   },
   {
    "fieldname": "last_name",
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Last Name",
-   "reqd": 1
+   "reqd": 1,
+   "set_only_once": 1
   },
   {
    "fieldname": "full_name",
@@ -63,29 +50,30 @@
    "options": "DY-LEAD-"
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "lead_source",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Lead Source",
-   "options": "Lead Source"
-  },
-  {
-   "fieldname": "phonebook",
-   "fieldtype": "Table",
-   "label": "Phonebook",
-   "options": "Phonebook"
+   "options": "Lead Source",
+   "set_only_once": 1
   },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "mobile",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Mobile"
+   "label": "Mobile",
+   "reqd": 1,
+   "set_only_once": 1
   },
   {
    "allow_in_quick_entry": 1,
    "fieldname": "email",
    "fieldtype": "Data",
-   "label": "Email"
+   "in_list_view": 1,
+   "label": "Email",
+   "set_only_once": 1
   },
   {
    "default": "New",
@@ -99,60 +87,28 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_eazn",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "nationality",
-   "fieldtype": "Link",
-   "label": "Nationality",
-   "options": "Country"
-  },
-  {
-   "fieldname": "gender",
-   "fieldtype": "Link",
-   "label": "Gender",
-   "options": "Gender"
-  },
-  {
-   "fieldname": "company",
-   "fieldtype": "Data",
-   "label": "Company"
-  },
-  {
-   "fieldname": "position",
-   "fieldtype": "Data",
-   "label": "Position"
-  },
-  {
-   "fieldname": "salary",
-   "fieldtype": "Currency",
-   "label": "Salary",
-   "precision": "0"
-  },
-  {
-   "fieldname": "column_break_ozsg",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "section_break_xiaj",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "column_break_eljz",
-   "fieldtype": "Column Break"
-  },
-  {
    "default": "0",
    "fieldname": "not_interested",
    "fieldtype": "Check",
-   "label": "Not Interested"
+   "label": "Not Interested",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_iesz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Link",
+   "label": "Contact",
+   "options": "Contact",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 17:06:41.540916",
+ "modified": "2025-03-25 21:16:33.805906",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",
