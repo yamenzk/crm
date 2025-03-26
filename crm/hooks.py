@@ -24,6 +24,9 @@ fixtures = [
     {
         "dt": "Bedroom"
     },
+    {
+        "dt": "Lead Source"
+    }
 ]
 # required_apps = []
 add_to_apps_screen = [

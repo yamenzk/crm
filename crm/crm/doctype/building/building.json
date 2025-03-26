@@ -1,15 +1,14 @@
 {
  "actions": [],
- "autoname": "naming_series:",
+ "autoname": "format:{project}-{building_id}",
  "creation": "2025-03-25 17:29:38.886891",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "project",
   "building_id",
   "building_amenities",
-  "naming_series",
   "column_break_dotu",
-  "project",
   "developer",
   "status",
   "column_break_gror",
@@ -54,20 +53,13 @@
    "options": "Developer"
   },
   {
-   "default": "DY-BLDG-",
-   "fieldname": "naming_series",
-   "fieldtype": "Select",
-   "hidden": 1,
-   "label": "Naming Series",
-   "options": "DY-BLDG-"
-  },
-  {
    "fieldname": "building_amenities",
    "fieldtype": "Table MultiSelect",
    "label": "Building Amenities",
    "options": "Amenities"
   },
   {
+   "default": "Available",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -77,11 +69,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 20:16:33.859536",
+ "modified": "2025-03-26 19:38:16.485654",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Building",
- "naming_rule": "By \"Naming Series\" field",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {
@@ -111,7 +103,7 @@
   },
   {
    "color": "Pink",
-   "title": "Secondhand Sell"
+   "title": "Secondhand Sale"
   },
   {
    "color": "Orange",

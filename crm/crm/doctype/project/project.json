@@ -6,13 +6,18 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "dashboard_tab",
+  "project_html",
+  "details_tab",
   "project_name",
   "developer",
+  "coords",
   "column_break_wlav",
   "project_amenities",
   "amenities",
   "column_break_zwbg",
-  "status"
+  "status",
+  "cover_photo"
  ],
  "fields": [
   {
@@ -51,12 +56,39 @@
    "fieldname": "amenities",
    "fieldtype": "Int",
    "label": "Amenities"
+  },
+  {
+   "fieldname": "cover_photo",
+   "fieldtype": "Attach Image",
+   "label": "Cover Photo"
+  },
+  {
+   "fieldname": "dashboard_tab",
+   "fieldtype": "Tab Break",
+   "label": "\ud83c\udfe1"
+  },
+  {
+   "fieldname": "project_html",
+   "fieldtype": "HTML",
+   "label": "Project HTML"
+  },
+  {
+   "fieldname": "details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Details"
+  },
+  {
+   "fieldname": "coords",
+   "fieldtype": "Long Text",
+   "hidden": 1,
+   "label": "Coords"
   }
  ],
  "grid_page_length": 50,
+ "image_field": "cover_photo",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 20:16:52.178837",
+ "modified": "2025-03-26 16:57:54.950528",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Project",

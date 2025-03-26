@@ -1,10 +1,11 @@
 {
  "actions": [],
- "allow_rename": 1,
+ "autoname": "format:{building}-{unit_id}",
  "creation": "2025-03-25 17:35:22.264460",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "unit_id",
   "building",
   "project",
   "developer",
@@ -71,19 +72,26 @@
    "read_only": 1
   },
   {
+   "default": "Available",
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
    "options": "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent"
+  },
+  {
+   "fieldname": "unit_id",
+   "fieldtype": "Data",
+   "label": "Unit ID"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 20:16:43.947467",
+ "modified": "2025-03-26 17:41:20.323173",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Unit",
+ "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
   {

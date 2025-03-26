@@ -12,6 +12,21 @@ class Lead(Document):
             "lead_update", {"lead": self.as_dict()}, after_commit=True
         )
         if self.has_value_changed('lead_owner') and not self.is_new():
+            old_owner = self.get_doc_before_save().lead_owner
+            if old_owner:
+            # Remove permissions from old owner for Contact
+                frappe.share.remove(
+                    doctype="Contact",
+                    name=self.contact,
+                    user=old_owner,
+                )
+                
+                # Remove permissions from old owner for Lead
+                frappe.share.remove(
+                    doctype="Lead",
+                    name=self.name,
+                    user=old_owner,
+                )
             frappe.share.add(
                 doctype="Contact",
                 name=self.contact,

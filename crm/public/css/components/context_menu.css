@@ -1,7 +1,7 @@
 /* CRM Kanban Context Menu Styles */
 .crm-kanban-context-menu {
 	position: fixed;
-	z-index: 1000;
+	z-index: 999999;
 	font-family: var(--font-stack);
 	animation: crm-fade-in 0.15s ease-in-out;
 }
@@ -15,6 +15,7 @@
 	box-shadow: var(--shadow-md);
 	color: var(--text-color);
 	min-width: 200px;
+	z-index: 999999;
 }
 
 .crm-menu-list {
