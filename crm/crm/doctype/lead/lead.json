@@ -19,7 +19,6 @@
   "email",
   "contact",
   "column_break_lfbu",
-  "lead_teamleader",
   "lead_owner"
  ],
  "fields": [
@@ -112,12 +111,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "lead_teamleader",
-   "fieldtype": "Link",
-   "label": "Lead Teamleader",
-   "options": "User"
-  },
-  {
    "fieldname": "lead_owner",
    "fieldtype": "Link",
    "label": "Lead Owner",
@@ -127,7 +120,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-25 22:38:32.911978",
+ "modified": "2025-03-27 19:33:51.495491",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",

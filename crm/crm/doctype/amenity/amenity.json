@@ -46,7 +46,7 @@
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-26 18:05:22.717208",
+ "modified": "2025-03-27 19:41:39.563937",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Amenity",
@@ -64,6 +64,38 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "CRM Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "CRM Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "CRM Reception",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Sales"
+  },
+  {
+   "read": 1,
+   "role": "CRM Team Leader"
   }
  ],
  "quick_entry": 1,

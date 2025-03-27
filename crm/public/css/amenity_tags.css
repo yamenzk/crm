@@ -59,7 +59,7 @@
 }
 
 .crm-tag-view-toggle.active {
-	background-color: var(--cyan-700) !important;
+	background-color: var(--gray-900) !important;
 }
 
 .crm-tag-view-toggle.active svg {

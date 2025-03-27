@@ -87,7 +87,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-26 17:41:20.323173",
+ "modified": "2025-03-27 19:39:58.596433",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Unit",
@@ -104,6 +104,40 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "CRM Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "CRM Manager",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "CRM Reception",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Sales",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Team Leader",
    "write": 1
   }
  ],

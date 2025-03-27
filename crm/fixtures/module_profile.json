@@ -1,0 +1,47 @@
+[
+ {
+  "block_modules": [
+   {
+    "module": "Automation"
+   },
+   {
+    "module": "Contacts"
+   },
+   {
+    "module": "Core"
+   },
+   {
+    "module": "Custom"
+   },
+   {
+    "module": "Desk"
+   },
+   {
+    "module": "Email"
+   },
+   {
+    "module": "Geo"
+   },
+   {
+    "module": "Integrations"
+   },
+   {
+    "module": "Printing"
+   },
+   {
+    "module": "Social"
+   },
+   {
+    "module": "Website"
+   },
+   {
+    "module": "Workflow"
+   }
+  ],
+  "docstatus": 0,
+  "doctype": "Module Profile",
+  "modified": "2025-03-25 16:37:41.955590",
+  "module_profile_name": "CRM",
+  "name": "CRM"
+ }
+]

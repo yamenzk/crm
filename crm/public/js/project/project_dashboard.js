@@ -201,7 +201,7 @@ class ProjectDashboard {
                                     <span class="crm-count">0</span>
                                     ${
 										hasCoords
-											? `<button class="btn btn-icon btn-sm crm-add-building" title="Add Building"><i data-feather="plus"></i></button>`
+											? `<button class="btn btn-icon btn-md btn-primary crm-add-building" style="width: 20px; height: 20px;" title="Add Building"><i data-feather="plus"></i></button>`
 											: ""
 									}
                                 </div>

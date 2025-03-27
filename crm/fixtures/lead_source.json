@@ -1,0 +1,93 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:45:22.058558",
+  "name": "Website",
+  "source": "Website"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:45:29.487761",
+  "name": "Client Referral",
+  "source": "Client Referral"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:45:34.828510",
+  "name": "Employee Referral",
+  "source": "Employee Referral"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:45:41.479519",
+  "name": "Dubizzle",
+  "source": "Dubizzle"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:45:45.228743",
+  "name": "Bayut",
+  "source": "Bayut"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:45:50.677538",
+  "name": "Property Finder",
+  "source": "Property Finder"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:45:54.914850",
+  "name": "Facebook",
+  "source": "Facebook"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:45:58.427331",
+  "name": "Instagram",
+  "source": "Instagram"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:46:03.092819",
+  "name": "TikTok",
+  "source": "TikTok"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:46:33.803515",
+  "name": "Google Ads",
+  "source": "Google Ads"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:46:38.838237",
+  "name": "Cold Calling",
+  "source": "Cold Calling"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:46:43.800002",
+  "name": "Direct Mail",
+  "source": "Direct Mail"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Lead Source",
+  "modified": "2025-03-26 19:47:19.291145",
+  "name": "Event",
+  "source": "Event"
+ }
+]

@@ -17,8 +17,6 @@ def restrict_kanban_creation():
         """
         )
 
-
-        # Remove create permission for all other roles
         for role in frappe.get_all(
             "Role", {"name": ["not in", ["System Manager"]]}
         ):
@@ -41,3 +39,9 @@ def after_migrate():
     )
     for workspace in workspaces:
         frappe.delete_doc("Workspace", workspace.name, force=True)
+    
+    genders = frappe.get_all(
+        "Gender", filters={"gender": ["not in", ["Male", "Female"]]}, fields=["name"]
+    )
+    for gender in genders:
+        frappe.delete_doc("Gender", gender.name, force=True)

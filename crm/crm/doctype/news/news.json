@@ -3,7 +3,7 @@
  "allow_copy": 1,
  "autoname": "field:news_title",
  "creation": "2025-03-18 20:21:22.503852",
- "default_view": "Image",
+ "default_view": "List",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -78,13 +78,12 @@
    "fieldtype": "Section Break"
   }
  ],
- "force_re_route_to_default_view": 1,
  "grid_page_length": 50,
  "hide_toolbar": 1,
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-18 23:06:42.347901",
+ "modified": "2025-03-27 17:51:15.632977",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "News",

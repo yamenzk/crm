@@ -7,7 +7,8 @@
  "engine": "InnoDB",
  "field_order": [
   "developer_name",
-  "image"
+  "image",
+  "developer_html"
  ],
  "fields": [
   {
@@ -18,14 +19,21 @@
   },
   {
    "fieldname": "image",
-   "fieldtype": "Attach",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
    "label": "Image"
+  },
+  {
+   "fieldname": "developer_html",
+   "fieldtype": "HTML",
+   "label": "Developer HTML"
   }
  ],
  "grid_page_length": 50,
+ "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-19 19:36:19.761787",
+ "modified": "2025-03-27 19:44:53.918507",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Developer",
@@ -43,6 +51,40 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "CRM Admin",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "CRM Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "CRM Reception",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Sales"
+  },
+  {
+   "read": 1,
+   "role": "CRM Team Leader"
   }
  ],
  "row_format": "Dynamic",

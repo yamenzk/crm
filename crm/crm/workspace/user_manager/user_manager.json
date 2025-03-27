@@ -1,0 +1,40 @@
+{
+ "app": "crm",
+ "charts": [],
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"User Manager\"}}]",
+ "creation": "2025-03-27 20:15:35.112143",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "color-review-points",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "User Manager",
+ "link_to": "crm-user-manager",
+ "link_type": "Page",
+ "links": [],
+ "modified": "2025-03-27 20:15:54.696782",
+ "modified_by": "Administrator",
+ "module": "CRM",
+ "name": "User Manager",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "CRM Manager"
+  },
+  {
+   "role": "CRM Admin"
+  }
+ ],
+ "sequence_id": 29.0,
+ "shortcuts": [],
+ "title": "User Manager",
+ "type": "Link"
+}

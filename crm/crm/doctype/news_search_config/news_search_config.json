@@ -8,12 +8,9 @@
  "field_order": [
   "search_term",
   "category",
-  "enabled",
-  "get_article_content",
   "column_break_dmbg",
-  "log_level",
-  "timeframe",
-  "limit"
+  "limit",
+  "enabled"
  ],
  "fields": [
   {
@@ -36,29 +33,8 @@
    "label": "Enabled"
   },
   {
-   "default": "0",
-   "fieldname": "get_article_content",
-   "fieldtype": "Check",
-   "hidden": 1,
-   "label": "Get Article Content"
-  },
-  {
    "fieldname": "column_break_dmbg",
    "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "log_level",
-   "fieldtype": "Select",
-   "hidden": 1,
-   "label": "Log Level",
-   "options": "\nERROR\nWARN\nINFO\nVERBOSE"
-  },
-  {
-   "default": "7d",
-   "fieldname": "timeframe",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Timeframe"
   },
   {
    "default": "20",
@@ -70,7 +46,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-18 22:04:10.089628",
+ "modified": "2025-03-27 16:39:49.307869",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "News Search Config",

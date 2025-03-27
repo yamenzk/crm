@@ -26,6 +26,15 @@ fixtures = [
     },
     {
         "dt": "Lead Source"
+    },
+    {
+        "dt": "News Search Config"
+    },
+    {
+        "dt": "Module Profile"
+    },
+    {
+        "dt": "Role Profile"
     }
 ]
 # required_apps = []

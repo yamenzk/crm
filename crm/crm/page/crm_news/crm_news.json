@@ -1,20 +1,20 @@
 {
  "content": null,
- "creation": "2025-03-18 19:52:10.818540",
+ "creation": "2025-03-27 17:02:11.606002",
  "docstatus": 0,
  "doctype": "Page",
- "icon": "fa fa-th-large",
+ "icon": "fa-newspaper-o",
  "idx": 0,
- "modified": "2025-03-18 19:52:10.818540",
+ "modified": "2025-03-27 17:02:11.606002",
  "modified_by": "Administrator",
  "module": "CRM",
- "name": "crm-dashboard",
+ "name": "crm-news",
  "owner": "Administrator",
- "page_name": "crm-dashboard",
+ "page_name": "crm-news",
  "roles": [],
  "script": null,
  "standard": "Yes",
  "style": null,
  "system_page": 1,
- "title": "Dashboard"
+ "title": "News"
 }

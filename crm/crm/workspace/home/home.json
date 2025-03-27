@@ -1,0 +1,62 @@
+{
+ "app": "crm",
+ "charts": [
+  {
+   "chart_name": "Leads Chart",
+   "label": "Leads"
+  }
+ ],
+ "content": "[{\"id\":\"pgMCrmhajk\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"P00eiz0x9d\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"New Leads\",\"col\":4}},{\"id\":\"z6s9SSeeUm\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"New Projects\",\"col\":4}},{\"id\":\"Fw6qiClGGe\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Available Units\",\"col\":4}},{\"id\":\"0ZjiD1YhRX\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Leads\",\"col\":12}},{\"id\":\"gVLna66iro\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Latest News\",\"col\":7}},{\"id\":\"3X_eWRSxL1\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"ToDo\",\"col\":5}}]",
+ "creation": "2025-03-16 20:34:47.360986",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "dashboard-list",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Home",
+ "link_to": "Lead",
+ "link_type": "DocType",
+ "links": [],
+ "modified": "2025-03-27 18:41:28.080128",
+ "modified_by": "Administrator",
+ "module": "CRM",
+ "name": "Home",
+ "number_cards": [
+  {
+   "label": "New Leads",
+   "number_card_name": "New Leads"
+  },
+  {
+   "label": "New Projects",
+   "number_card_name": "New Projects"
+  },
+  {
+   "label": "Available Units",
+   "number_card_name": "Available Units"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "News",
+   "label": "Latest News",
+   "quick_list_filter": "[[\"News\",\"published_date\",\"Timespan\",\"today\",false]]"
+  },
+  {
+   "document_type": "ToDo",
+   "label": "ToDo",
+   "quick_list_filter": "[[\"ToDo\",\"status\",\"=\",\"Open\",false]]"
+  }
+ ],
+ "roles": [],
+ "sequence_id": 1.0,
+ "shortcuts": [],
+ "title": "Home",
+ "type": "Workspace"
+}

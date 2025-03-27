@@ -1,0 +1,62 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2025-03-27 19:53:26.856684",
+  "name": "Team Leader",
+  "role_profile": "Team Leader",
+  "roles": [
+   {
+    "role": "CRM Team Leader"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2025-03-27 19:53:48.706237",
+  "name": "Sales",
+  "role_profile": "Sales",
+  "roles": [
+   {
+    "role": "CRM Sales"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2025-03-27 19:53:58.815056",
+  "name": "Reception",
+  "role_profile": "Reception",
+  "roles": [
+   {
+    "role": "CRM Reception"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2025-03-27 19:54:04.844785",
+  "name": "Manager",
+  "role_profile": "Manager",
+  "roles": [
+   {
+    "role": "CRM Manager"
+   }
+  ]
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Role Profile",
+  "modified": "2025-03-27 19:54:14.820987",
+  "name": "Admin",
+  "role_profile": "Admin",
+  "roles": [
+   {
+    "role": "CRM Admin"
+   }
+  ]
+ }
+]

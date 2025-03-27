@@ -3,6 +3,7 @@
  "allow_rename": 1,
  "autoname": "field:project_name",
  "creation": "2025-03-19 19:35:17.321562",
+ "default_view": "Image",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -13,9 +14,10 @@
   "developer",
   "coords",
   "column_break_wlav",
-  "project_amenities",
   "amenities",
+  "developer_contact",
   "column_break_zwbg",
+  "project_amenities",
   "status",
   "cover_photo"
  ],
@@ -41,8 +43,10 @@
    "fieldtype": "Column Break"
   },
   {
+   "default": "Available",
    "fieldname": "status",
    "fieldtype": "Select",
+   "hidden": 1,
    "label": "Status",
    "options": "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent"
   },
@@ -55,14 +59,16 @@
   {
    "fieldname": "amenities",
    "fieldtype": "Int",
-   "label": "Amenities"
+   "label": "Amenities Count"
   },
   {
    "fieldname": "cover_photo",
    "fieldtype": "Attach Image",
+   "hidden": 1,
    "label": "Cover Photo"
   },
   {
+   "depends_on": "eval:!(doc.__islocal)",
    "fieldname": "dashboard_tab",
    "fieldtype": "Tab Break",
    "label": "\ud83c\udfe1"
@@ -82,13 +88,21 @@
    "fieldtype": "Long Text",
    "hidden": 1,
    "label": "Coords"
+  },
+  {
+   "fieldname": "developer_contact",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Developer Contact",
+   "options": "Contact"
   }
  ],
+ "force_re_route_to_default_view": 1,
  "grid_page_length": 50,
  "image_field": "cover_photo",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-26 16:57:54.950528",
+ "modified": "2025-03-27 19:15:33.371468",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Project",

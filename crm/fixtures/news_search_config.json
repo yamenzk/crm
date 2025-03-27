@@ -1,0 +1,62 @@
+[
+ {
+  "category": "Dubai",
+  "docstatus": 0,
+  "doctype": "News Search Config",
+  "enabled": 1,
+  "limit": 20,
+  "modified": "2025-03-27 16:40:13.007405",
+  "name": "Real Estate Dubai",
+  "search_term": "Real Estate Dubai"
+ },
+ {
+  "category": "UAE",
+  "docstatus": 0,
+  "doctype": "News Search Config",
+  "enabled": 1,
+  "limit": 20,
+  "modified": "2025-03-27 16:40:28.746269",
+  "name": "Real Estate UAE",
+  "search_term": "Real Estate UAE"
+ },
+ {
+  "category": "UAE",
+  "docstatus": 0,
+  "doctype": "News Search Config",
+  "enabled": 1,
+  "limit": 20,
+  "modified": "2025-03-27 16:40:40.841796",
+  "name": "Real Estate United Arab Emirates",
+  "search_term": "Real Estate United Arab Emirates"
+ },
+ {
+  "category": "Dubai",
+  "docstatus": 0,
+  "doctype": "News Search Config",
+  "enabled": 1,
+  "limit": 20,
+  "modified": "2025-03-27 17:44:09.744132",
+  "name": "عقارات دبي",
+  "search_term": "عقارات دبي"
+ },
+ {
+  "category": "UAE",
+  "docstatus": 0,
+  "doctype": "News Search Config",
+  "enabled": 1,
+  "limit": 20,
+  "modified": "2025-03-27 17:44:31.684537",
+  "name": "عقارات الامارات",
+  "search_term": "عقارات الامارات"
+ },
+ {
+  "category": "Dubai",
+  "docstatus": 0,
+  "doctype": "News Search Config",
+  "enabled": 1,
+  "limit": 20,
+  "modified": "2025-03-27 17:44:50.006355",
+  "name": "عقار دبي",
+  "search_term": "عقار دبي"
+ }
+]
