@@ -496,9 +496,6 @@ def scrape_and_store_news():
         fields=[
             "name",
             "search_term",
-            "get_article_content",
-            "log_level",
-            "timeframe",
             "limit",
             "category",
         ],
