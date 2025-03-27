@@ -2240,6 +2240,7 @@ class ProjectDashboard {
 					fieldname: "status",
 					fieldtype: "Select",
 					options: "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent",
+					default: "Available",
 				},
 				{
 					fieldname: "section_break_amenities",
@@ -2560,6 +2561,7 @@ class ProjectDashboard {
 							fieldname: "status",
 							fieldtype: "Select",
 							options: "\nAvailable\nSold-out\nSecondhand Sale\nSecondhand Rent",
+							default: "Available",
 						},
 						{
 							label: "Bedrooms",

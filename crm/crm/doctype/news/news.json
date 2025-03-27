@@ -83,7 +83,7 @@
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-27 17:51:15.632977",
+ "modified": "2025-03-27 23:57:12.706018",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "News",
@@ -101,6 +101,31 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Admin",
+   "share": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Manager",
+   "share": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Reception",
+   "share": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Sales",
+   "share": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Team Leader",
+   "share": 1
   }
  ],
  "row_format": "Dynamic",

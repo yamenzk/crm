@@ -88,3 +88,85 @@ def get_news_data(source=None, period=None, search_term=None):
     except Exception as e:
         frappe.log_error(f"Error in get_news_data: {str(e)}", "News API Error")
         return {"success": False, "error": str(e)}
+
+
+
+@frappe.whitelist()
+def get_developer_contact_for_project(project_name):
+    """
+    Get developer contact details for a project, bypassing Contact permissions
+    but respecting Project permissions
+    """
+    # Check if user has read permission for the Project
+    if not frappe.has_permission("Project", "read", project_name):
+        frappe.throw(_("Not permitted to access this project"))
+
+    # Get the project
+    project = frappe.get_doc("Project", project_name)
+
+    if not project.developer_contact:
+        return {
+            "status": "error",
+            "message": "No developer contact assigned to this project",
+        }
+
+    # Directly access the database to get contact info without permission check
+    contact = frappe.db.get_value(
+        "Contact",
+        project.developer_contact,
+        ["name", "salutation", "first_name", "last_name", "department", "image"],
+        as_dict=1,
+    )
+
+    if not contact:
+        return {"status": "error", "message": "Contact not found"}
+
+    # Get email and phone data
+    emails = frappe.db.get_all(
+        "Contact Email",
+        filters={"parent": contact.name},
+        fields=["email_id", "is_primary"],
+    )
+
+    phones = frappe.db.get_all(
+        "Contact Phone",
+        filters={"parent": contact.name},
+        fields=["phone", "is_primary_mobile_no"],
+    )
+
+    # Format the response
+    full_name = " ".join(
+        filter(
+            None,
+            [
+                contact.salutation or "",
+                contact.first_name or "",
+                contact.last_name or "",
+            ],
+        )
+    )
+
+    # Get primary email
+    primary_email = ""
+    if emails:
+        primary = next((e for e in emails if e.is_primary), emails[0])
+        primary_email = primary.email_id
+
+    # Get primary phone
+    primary_phone = ""
+    if phones:
+        primary = next((p for p in phones if p.is_primary_mobile_no), phones[0])
+        primary_phone = primary.phone
+
+    return {
+        "status": "success",
+        "contact": {
+            "name": contact.name,
+            "full_name": full_name,
+            "department": contact.department,
+            "image": contact.image,
+            "primary_email": primary_email,
+            "primary_phone": primary_phone,
+        },
+    }
+

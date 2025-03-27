@@ -129,45 +129,21 @@ function show_contact_assignment_dialog(frm) {
 
 function show_contact_details_dialog(frm) {
 	if (!frm.doc.developer_contact) return;
-
-	// Fetch full contact details
 	frappe.call({
-		method: "frappe.client.get",
+		method: "crm.api.get_developer_contact_for_project",
 		args: {
-			doctype: "Contact",
-			name: frm.doc.developer_contact,
+			project_name: frm.doc.name,
 		},
+		freeze: true,
+		freeze_message: __("Loading contact details..."),
 		callback: function (r) {
-			if (r.message) {
-				const contact = r.message;
 
-				// Get primary email
-				let primaryEmail = "";
-				if (contact.email_ids && contact.email_ids.length) {
-					const primary = contact.email_ids.find((email) => email.is_primary === 1);
-					primaryEmail = primary ? primary.email_id : contact.email_ids[0].email_id;
-				}
-
-				// Get primary phone
-				let primaryPhone = "";
-				if (contact.phone_nos && contact.phone_nos.length) {
-					const primary = contact.phone_nos.find(
-						(phone) => phone.is_primary_mobile_no === 1
-					);
-					primaryPhone = primary ? primary.phone : contact.phone_nos[0].phone;
-				}
-
-				const fullName = [
-					contact.salutation || "",
-					contact.first_name || "",
-					contact.last_name || "",
-				]
-					.filter(Boolean)
-					.join(" ");
+			if (r.message && r.message.status === "success") {
+				const contact = r.message.contact;
 
 				// Use Gravatar if available
-				const contactImage = fullName
-					? frappe.get_gravatar(fullName)
+				const contactImage = contact.full_name
+					? frappe.get_gravatar(contact.full_name)
 					: contact.image || "/assets/frappe/images/user.png";
 
 				// Create the contact details dialog
@@ -178,110 +154,121 @@ function show_contact_details_dialog(frm) {
 							fieldtype: "HTML",
 							fieldname: "contact_details",
 							options: `
-								<div class="contact-details-container">
-									<div class="contact-header">
-										<div class="contact-avatar">
-											<img src="${contactImage}" alt="${fullName}">
-										</div>
-										<div class="contact-info">
-											<h4>${fullName}</h4>
-											<div class="contact-department">${contact.department || ""}</div>
-										</div>
-									</div>
-									<div class="contact-body">
-										${
-											primaryEmail
+                                <div class="contact-details-container">
+                                    <div class="contact-header">
+                                        <div class="contact-avatar">
+                                            <img src="${contactImage}" alt="${contact.full_name}">
+                                        </div>
+                                        <div class="contact-info">
+                                            <h4>${contact.full_name}</h4>
+                                            <div class="contact-department">${
+												contact.department || ""
+											}</div>
+                                        </div>
+                                    </div>
+                                    <div class="contact-body">
+                                        ${
+											contact.primary_email
 												? `<div class="contact-field">
-												<div class="field-label">${__("Email")}</div>
-												<div class="field-value">
-													<a href="mailto:${primaryEmail}">${primaryEmail}</a>
-												</div>
-											</div>`
+                                                <div class="field-label">${__("Email")}</div>
+                                                <div class="field-value">
+                                                    <a href="mailto:${contact.primary_email}">${
+														contact.primary_email
+												  }</a>
+                                                </div>
+                                            </div>`
 												: ""
 										}
-										${
-											primaryPhone
+                                        ${
+											contact.primary_phone
 												? `<div class="contact-field">
-												<div class="field-label">${__("Phone")}</div>
-												<div class="field-value">
-													<a href="tel:${primaryPhone}">${primaryPhone}</a>
-												</div>
-											</div>`
+                                                <div class="field-label">${__("Phone")}</div>
+                                                <div class="field-value">
+                                                    <a href="tel:${contact.primary_phone}">${
+														contact.primary_phone
+												  }</a>
+                                                </div>
+                                            </div>`
 												: ""
 										}
-										<div class="contact-actions">
-											<button class="btn btn-sm btn-default view-full-contact">
-												${__("View Full Contact")}
-											</button>
-											<button class="btn btn-sm btn-primary replace-contact">
-												${__("Replace Contact")}
-											</button>
-										</div>
-									</div>
-								</div>
-								<style>
-									.contact-details-container {
-										padding: 15px;
-										font-family: var(--font-stack);
-									}
-									.contact-header {
-										display: flex;
-										align-items: center;
-										margin-bottom: 20px;
-									}
-									.contact-avatar {
-										width: 60px;
-										height: 60px;
-										border-radius: 50%;
-										overflow: hidden;
-										margin-right: 15px;
-										box-shadow: 0 0 0 1px var(--border-color);
-									}
-									.contact-avatar img {
-										width: 100%;
-										height: 100%;
-										object-fit: cover;
-									}
-									.contact-info h4 {
-										margin: 0 0 5px 0;
-										color: var(--text-color);
-									}
-									.contact-department {
-										color: var(--text-muted);
-										font-size: 13px;
-									}
-									.contact-body {
-										border-top: 1px solid var(--border-color);
-										padding-top: 15px;
-									}
-									.contact-field {
-										margin-bottom: 12px;
-									}
-									.field-label {
-										font-size: 12px;
-										color: var(--text-muted);
-										margin-bottom: 3px;
-									}
-									.field-value {
-										font-size: 14px;
-										color: var(--text-color);
-									}
-									.field-value a {
-										color: var(--primary);
-										text-decoration: none;
-									}
-									.field-value a:hover {
-										text-decoration: underline;
-									}
-									.contact-actions {
-										display: flex;
-										justify-content: space-between;
-										margin-top: 20px;
-										padding-top: 15px;
-										border-top: 1px solid var(--border-color);
-									}
-								</style>
-							`,
+                                        <div class="contact-actions">
+                                            ${
+												frappe.perm.has_perm("Contact", 0, "read")
+													? `<button class="btn btn-sm btn-default view-full-contact">
+                                                    ${__("View Full Contact")}
+                                                </button>`
+													: ""
+											}
+                                            <button class="btn btn-sm btn-primary replace-contact">
+                                                ${__("Replace Contact")}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <style>
+                                    /* Styles remain the same */
+                                    .contact-details-container {
+                                        padding: 15px;
+                                        font-family: var(--font-stack);
+                                    }
+                                    .contact-header {
+                                        display: flex;
+                                        align-items: center;
+                                        margin-bottom: 20px;
+                                    }
+                                    .contact-avatar {
+                                        width: 60px;
+                                        height: 60px;
+                                        border-radius: 50%;
+                                        overflow: hidden;
+                                        margin-right: 15px;
+                                        box-shadow: 0 0 0 1px var(--border-color);
+                                    }
+                                    .contact-avatar img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                    }
+                                    .contact-info h4 {
+                                        margin: 0 0 5px 0;
+                                        color: var(--text-color);
+                                    }
+                                    .contact-department {
+                                        color: var(--text-muted);
+                                        font-size: 13px;
+                                    }
+                                    .contact-body {
+                                        border-top: 1px solid var(--border-color);
+                                        padding-top: 15px;
+                                    }
+                                    .contact-field {
+                                        margin-bottom: 12px;
+                                    }
+                                    .field-label {
+                                        font-size: 12px;
+                                        color: var(--text-muted);
+                                        margin-bottom: 3px;
+                                    }
+                                    .field-value {
+                                        font-size: 14px;
+                                        color: var(--text-color);
+                                    }
+                                    .field-value a {
+                                        color: var(--primary);
+                                        text-decoration: none;
+                                    }
+                                    .field-value a:hover {
+                                        text-decoration: underline;
+                                    }
+                                    .contact-actions {
+                                        display: flex;
+                                        justify-content: space-between;
+                                        margin-top: 20px;
+                                        padding-top: 15px;
+                                        border-top: 1px solid var(--border-color);
+                                    }
+                                </style>
+                            `,
 						},
 					],
 				});
@@ -289,14 +276,22 @@ function show_contact_details_dialog(frm) {
 				dialog.show();
 
 				// Attach event handlers
-				dialog.$wrapper.find(".view-full-contact").on("click", function () {
-					dialog.hide();
-					frappe.set_route("Form", "Contact", contact.name);
-				});
+				if (frappe.perm.has_perm("Contact", 0, "read")) {
+					dialog.$wrapper.find(".view-full-contact").on("click", function () {
+						dialog.hide();
+						frappe.set_route("Form", "Contact", contact.name);
+					});
+				}
 
 				dialog.$wrapper.find(".replace-contact").on("click", function () {
 					dialog.hide();
 					show_contact_assignment_dialog(frm);
+				});
+			} else {
+				frappe.msgprint({
+					title: __("Contact Information"),
+					message: r.message?.message || __("Could not load contact information"),
+					indicator: "orange",
 				});
 			}
 		},

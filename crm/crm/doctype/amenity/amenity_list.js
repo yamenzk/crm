@@ -25,19 +25,38 @@ frappe.listview_settings["Amenity"] = {
             </svg>
         </button>
     `);
-		const $installButton = $(`
-        <button class="btn btn-default btn-sm install-amenities-btn" title="Install Common Amenities">
-            <svg class="icon icon-sm">
-                <use href="#icon-list-alt"></use>
-            </svg>
-        </button>
-    `);
 
-		listview.page.standard_actions.find(".primary-action").before($installButton);
-        listview.page.standard_actions.find(".page-icon-group").before($toggleButton);
-		
-        
-        // Create tag view container
+		// Only show install button if user has create permission for Amenity
+		if (frappe.perm.has_perm("Amenity", 0, "create")) {
+			const $installButton = $(`
+            <button class="btn btn-default btn-sm install-amenities-btn" title="Install Common Amenities">
+                <svg class="icon icon-sm">
+                    <use href="#icon-list-alt"></use>
+                </svg>
+            </button>
+            `);
+
+			listview.page.standard_actions.find(".primary-action").before($installButton);
+
+			// Install common amenities on button click
+			$installButton.on("click", () => {
+				frappe.msgprint({
+					title: __("Import Amenities"),
+					message: __(
+						"Are you sure you want to import common amenities? This will create amenity records from the default list."
+					),
+					primary_action: {
+						label: __("Proceed"),
+						server_action: "crm.crm.doctype.amenity.amenity.import_common_amenities",
+						args: {},
+					},
+				});
+			});
+		}
+
+		listview.page.standard_actions.find(".page-icon-group").before($toggleButton);
+
+		// Create tag view container
 		this.$tagViewContainer = $(`
             <div class="crm-amenity-tag-view">
                 <div class="crm-amenity-tags-container"></div>
@@ -49,21 +68,6 @@ frappe.listview_settings["Amenity"] = {
 			this.isTagViewActive = !this.isTagViewActive;
 			this.toggleView(listview, this.isTagViewActive);
 			$toggleButton.toggleClass("active", this.isTagViewActive);
-		});
-
-		// Install common amenities on button click
-		$installButton.on("click", () => {
-			frappe.msgprint({
-				title: __("Import Amenities"),
-				message: __(
-					"Are you sure you want to import common amenities? This will create amenity records from the default list."
-				),
-				primary_action: {
-					label: __("Proceed"),
-					server_action: "crm.crm.doctype.amenity.amenity.import_common_amenities",
-					args: {},
-				},
-			});
 		});
 
 		// Initial load of tags

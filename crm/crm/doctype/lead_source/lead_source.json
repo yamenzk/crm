@@ -22,7 +22,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-16 21:14:31.098353",
+ "modified": "2025-03-27 23:56:05.212377",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead Source",
@@ -40,6 +40,31 @@
    "role": "System Manager",
    "share": 1,
    "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "read": 1,
+   "role": "CRM Admin",
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "role": "CRM Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "CRM Reception"
+  },
+  {
+   "read": 1,
+   "role": "CRM Sales"
+  },
+  {
+   "read": 1,
+   "role": "CRM Team Leader"
   }
  ],
  "quick_entry": 1,

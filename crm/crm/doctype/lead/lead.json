@@ -120,7 +120,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-03-27 19:33:51.495491",
+ "modified": "2025-03-27 23:53:47.537136",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",
@@ -141,67 +141,40 @@
   },
   {
    "create": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "CRM Manager",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
-   "email": 1,
-   "export": 1,
-   "if_owner": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "CRM Team Leader",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "create": 1,
    "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
    "read": 1,
-   "report": 1,
    "role": "CRM Admin",
    "share": 1,
    "write": 1
   },
   {
    "create": 1,
-   "email": 1,
-   "export": 1,
-   "if_owner": 1,
-   "print": 1,
    "read": 1,
-   "report": 1,
+   "role": "CRM Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "if_owner": 1,
+   "read": 1,
+   "role": "CRM Reception",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "if_owner": 1,
+   "read": 1,
    "role": "CRM Sales",
    "share": 1,
    "write": 1
   },
   {
    "create": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "report": 1,
-   "role": "CRM Reception",
-   "share": 1
-  },
-  {
-   "email": 1,
-   "export": 1,
-   "print": 1,
+   "if_owner": 1,
    "read": 1,
-   "report": 1,
-   "role": "CRM Sales",
+   "role": "CRM Team Leader",
    "share": 1,
    "write": 1
   }

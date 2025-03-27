@@ -95,49 +95,80 @@ class UserManager {
 
 			// Render user cards
 			users.forEach((user) => {
+				// Get the user's CRM role
+				const crmRoles = [
+					"CRM Admin",
+					"CRM Manager",
+					"CRM Team Leader",
+					"CRM Sales",
+					"CRM Reception",
+				];
+
+				let userRole = "";
+				if (user.roles && user.roles.length) {
+					for (let roleObj of user.roles) {
+						if (crmRoles.includes(roleObj.role)) {
+							userRole = roleObj.role;
+							break;
+						}
+					}
+				}
+
+				// Create role badge HTML
+				let roleBadgeClass = "user-role-none";
+				if (userRole) {
+					const roleName = userRole.replace(/\s+/g, "-").toLowerCase();
+					roleBadgeClass = `role-${roleName}`;
+				}
+
+				const roleBadge = userRole
+					? `<div class="user-role-badge ${roleBadgeClass}">${userRole}</div>`
+					: `<div class="user-role-badge user-role-none">No CRM Role</div>`;
+
 				const card = $(
 					`<div class="crm-user-card ${user.enabled ? "" : "disabled"}" data-name="${
 						user.name
 					}">
-                    <div class="crm-user-card-header">
-                        <div class="user-avatar">
-                            ${
-								user.user_image
-									? `<img src="${user.user_image}" alt="${
-											user.full_name || user.name
-									  }">`
-									: `<div class="avatar-frame standard-image">
-                                    ${
-										user.full_name
-											? user.full_name.charAt(0).toUpperCase()
-											: user.name.charAt(0).toUpperCase()
-									}
-                                </div>`
-							}
-                            <div class="user-status ${user.enabled ? "active" : "inactive"}"></div>
-                        </div>
-                        <div>
-                            <h3 class="user-name">${user.full_name || user.name}</h3>
-                            <div class="user-email">${user.name}</div>
-                        </div>
-                    </div>
-                    <div class="user-activity">
+                <div class="crm-user-card-header">
+                    <div class="user-avatar">
                         ${
-							user.last_active
-								? `<div class="last-active">${__(
-										"Last active"
-								  )}: ${frappe.datetime.prettyDate(user.last_active)}</div>`
-								: `<div class="last-active">${__("Never logged in")}</div>`
+							user.user_image
+								? `<img src="${user.user_image}" alt="${
+										user.full_name || user.name
+								  }">`
+								: `<div class="avatar-frame standard-image">
+                                ${
+									user.full_name
+										? user.full_name.charAt(0).toUpperCase()
+										: user.name.charAt(0).toUpperCase()
+								}
+                            </div>`
 						}
-                        <div class="user-actions">
-                            <button class="btn btn-sm btn-default view-user-btn" title="${__(
-								"View Details"
-							)}">
-                                <i class="fa fa-eye"></i>
-                            </button>
-                        </div>
+                        <div class="user-status ${user.enabled ? "active" : "inactive"}"></div>
                     </div>
-                </div>`
+                    <div>
+                        <h3 class="user-name">${user.full_name || user.name}</h3>
+                        <div class="user-email">${user.name}</div>
+                        ${roleBadge}
+                    </div>
+                </div>
+                <div class="user-activity">
+                    ${
+						user.last_active
+							? `<div class="last-active">${__(
+									"Last active"
+							  )}: ${frappe.datetime.prettyDate(user.last_active)}</div>`
+							: `<div class="last-active">${__("Never logged in")}</div>`
+					}
+                    <div class="user-actions">
+                        <button class="btn btn-sm btn-default view-user-btn" title="${__(
+							"View Details"
+						)}">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>`
 				);
 
 				userList.append(card);
@@ -214,84 +245,94 @@ class UserManager {
 	showAddUserDialog() {
 		const me = this;
 
-		// Get role profiles for the dropdown
-		this.getRoleProfiles().then((profiles) => {
-			const roleOptions = profiles.map((p) => ({
-				label: p.role_profile,
-				value: p.name,
-			}));
+		// Define the specific CRM roles we want to use
+		const crmRoles = [
+			"CRM Admin",
+			"CRM Manager",
+			"CRM Team Leader",
+			"CRM Sales",
+			"CRM Reception",
+		];
 
-			// Create the dialog
-			const dialog = new frappe.ui.Dialog({
-				title: __("Add New User"),
-				fields: [
-					{
-						fieldtype: "Section Break",
-						label: __("User Information"),
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "email",
-						label: __("Email"),
-						reqd: 1,
-						options: "Email",
-					},
-					{
-						fieldtype: "Column Break",
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "new_password",
-						label: __("Password"),
-						reqd: 1,
-						toggle_password: true,
-					},
-					{
-						fieldtype: "Section Break",
-						label: __("User Details"),
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "first_name",
-						label: __("First Name"),
-						reqd: 1,
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "last_name",
-						label: __("Last Name"),
-						reqd: 1,
-					},
-					{
-						fieldtype: "Column Break",
-					},
-					{
-						fieldtype: "Select",
-						fieldname: "role_profile",
-						label: __("Role Profile"),
-						options: roleOptions,
-						reqd: 1,
-					},
-					{
-						fieldtype: "Section Break",
-						label: __("Profile Image"),
-					},
-					{
-						fieldtype: "Attach Image",
-						fieldname: "user_image",
-						label: __("User Image"),
-						description: __("Max file size: 2MB"),
-					},
-				],
-				primary_action_label: __("Create User"),
-				primary_action: (values) => {
-					dialog.hide();
-					me.createUser(values);
+		// Create the dialog
+		const dialog = new frappe.ui.Dialog({
+			title: __("Add New User"),
+			fields: [
+				{
+					fieldtype: "Section Break",
+					label: __("User Information"),
 				},
-			});
-
-			dialog.show();
+				{
+					fieldtype: "Data",
+					fieldname: "email",
+					label: __("Email"),
+					reqd: 1,
+					options: "Email",
+				},
+				{
+					fieldtype: "Column Break",
+				},
+				{
+					fieldtype: "Data",
+					fieldname: "new_password",
+					label: __("Password"),
+					reqd: 1,
+					toggle_password: true,
+				},
+				{
+					fieldtype: "Section Break",
+					label: __("User Details"),
+				},
+				{
+					fieldtype: "Data",
+					fieldname: "first_name",
+					label: __("First Name"),
+					reqd: 1,
+				},
+				{
+					fieldtype: "Data",
+					fieldname: "last_name",
+					label: __("Last Name"),
+					reqd: 1,
+				},
+				{
+					fieldtype: "Column Break",
+				},
+				{
+					fieldtype: "Data",
+					fieldname: "mobile_no",
+					label: __("Mobile No"),
+				},
+				{
+					fieldtype: "Section Break",
+					label: __("User Role"),
+				},
+				{
+					fieldtype: "Select",
+					fieldname: "role",
+					label: __("Role"),
+					options: crmRoles,
+					reqd: 1,
+				},
+				{
+					fieldtype: "Section Break",
+					label: __("Profile Image"),
+				},
+				{
+					fieldtype: "Attach Image",
+					fieldname: "user_image",
+					label: __("User Image"),
+					description: __("Max file size: 2MB"),
+				},
+			],
+			primary_action_label: __("Create User"),
+			primary_action: (values) => {
+				dialog.hide();
+				me.createUser(values);
+			},
 		});
+
+		dialog.show();
 	}
 
 	showUserDetailsDialog(userName) {
@@ -308,18 +349,57 @@ class UserManager {
 				if (r.message) {
 					const user = r.message;
 
-					// Prepare user roles display
-					let rolesHTML = "";
-					if (user.role_profile_name) {
-						rolesHTML += `<div class="user-role-profile">${user.role_profile_name}</div>`;
+					// Define the specific CRM roles we want to highlight
+					const crmRoles = [
+						"CRM Admin",
+						"CRM Manager",
+						"CRM Team Leader",
+						"CRM Sales",
+						"CRM Reception",
+					];
+
+					// Find the user's CRM role (if any)
+					let userCrmRole = "";
+					if (user.roles && user.roles.length) {
+						for (let roleObj of user.roles) {
+							if (crmRoles.includes(roleObj.role)) {
+								userCrmRole = roleObj.role;
+								break;
+							}
+						}
 					}
 
+					// Create a role badge class
+					let roleBadgeClass = "user-role-none";
+					if (userCrmRole) {
+						const roleName = userCrmRole.replace(/\s+/g, "-").toLowerCase();
+						roleBadgeClass = `role-${roleName}`;
+					}
+
+					// Prepare user roles display with styled CRM role
+					let rolesHTML = "";
+					if (userCrmRole) {
+						rolesHTML += `<div class="user-primary-role">
+                        <span class="dialog-role-badge ${roleBadgeClass}">${userCrmRole}</span>
+                    </div>`;
+					}
+
+					// Add all other roles
 					if (user.roles && user.roles.length) {
-						rolesHTML += '<div class="user-roles-list">';
-						user.roles.forEach((role) => {
-							rolesHTML += `<span class="user-role-badge">${role.role}</span>`;
-						});
-						rolesHTML += "</div>";
+						const otherRoles = user.roles
+							.filter((r) => r.role !== userCrmRole)
+							.map((r) => r.role);
+
+						if (otherRoles.length > 0) {
+							rolesHTML += '<div class="user-other-roles">';
+							if (otherRoles.length > 0) {
+								rolesHTML += '<div class="other-roles-label">Other Roles:</div>';
+								otherRoles.forEach((role) => {
+									rolesHTML += `<span class="user-role-badge">${role}</span>`;
+								});
+							}
+							rolesHTML += "</div>";
+						}
 					}
 
 					// Create the dialog
@@ -330,77 +410,80 @@ class UserManager {
 								fieldtype: "HTML",
 								fieldname: "user_details",
 								options: `
-                                    <div class="user-details-container">
-                                        <div class="user-header">
-                                            <div class="user-avatar-large">
-												${
-													user.user_image
-														? `<img src="${user.user_image}" alt="${
-																user.full_name || user.name
-														  }">`
-														: `<div class="avatar-frame standard-image" style="background-color: var(--avatar-frame-bg); font-size: 24px;">
-														${user.full_name ? user.full_name.charAt(0).toUpperCase() : user.name.charAt(0).toUpperCase()}
-													</div>`
-												}
-											</div>
-                                            <div class="user-info-large">
-                                                <h3>${user.full_name || user.name}</h3>
-                                                <div class="user-email-large">${user.name}</div>
-                                                <div class="user-status-indicator ${
-													user.enabled ? "active" : "inactive"
-												}">
-                                                    ${user.enabled ? __("Active") : __("Disabled")}
-                                                </div>
-                                            </div>
+                                <div class="user-details-container">
+                                    <div class="user-header">
+                                        <div class="user-avatar-large">
+                                            ${
+												user.user_image
+													? `<img src="${user.user_image}" alt="${
+															user.full_name || user.name
+													  }">`
+													: `<div class="avatar-frame standard-image" style="background-color: var(--avatar-frame-bg); font-size: 24px;">
+                                                    ${
+														user.full_name
+															? user.full_name
+																	.charAt(0)
+																	.toUpperCase()
+															: user.name.charAt(0).toUpperCase()
+													}
+                                                </div>`
+											}
                                         </div>
-                                        
-                                        <div class="user-details-section">
-                                            <h4>${__("User Details")}</h4>
-                                            <div class="user-detail-row">
-                                                <div class="detail-label">${__("First Name")}</div>
-                                                <div class="detail-value">${
-													user.first_name || "-"
-												}</div>
-                                            </div>
-                                            <div class="user-detail-row">
-                                                <div class="detail-label">${__("Last Name")}</div>
-                                                <div class="detail-value">${
-													user.last_name || "-"
-												}</div>
-                                            </div>
-                                            <div class="user-detail-row">
-                                                <div class="detail-label">${__("Mobile No")}</div>
-                                                <div class="detail-value">${
-													user.mobile_no || "-"
-												}</div>
-                                            </div>
-                                            <div class="user-detail-row">
-                                                <div class="detail-label">${__("Created On")}</div>
-                                                <div class="detail-value">${
-													frappe.datetime.str_to_user(user.creation) ||
-													"-"
-												}</div>
-                                            </div>
-                                            <div class="user-detail-row">
-                                                <div class="detail-label">${__("Last Login")}</div>
-                                                <div class="detail-value">${
-													user.last_login
-														? frappe.datetime.str_to_user(
-																user.last_login
-														  )
-														: "-"
-												}</div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="user-details-section">
-                                            <h4>${__("Roles")}</h4>
-                                            <div class="user-roles-container">
-                                                ${rolesHTML || __("No roles assigned")}
+                                        <div class="user-info-large">
+                                            <h3>${user.full_name || user.name}</h3>
+                                            <div class="user-email-large">${user.name}</div>
+                                            <div class="user-status-indicator ${
+												user.enabled ? "active" : "inactive"
+											}">
+                                                ${user.enabled ? __("Active") : __("Disabled")}
                                             </div>
                                         </div>
                                     </div>
-                                `,
+                                    
+                                    <div class="user-details-section">
+                                        <h4>${__("User Details")}</h4>
+                                        <div class="user-detail-row">
+                                            <div class="detail-label">${__("First Name")}</div>
+                                            <div class="detail-value">${
+												user.first_name || "-"
+											}</div>
+                                        </div>
+                                        <div class="user-detail-row">
+                                            <div class="detail-label">${__("Last Name")}</div>
+                                            <div class="detail-value">${
+												user.last_name || "-"
+											}</div>
+                                        </div>
+                                        <div class="user-detail-row">
+                                            <div class="detail-label">${__("Mobile No")}</div>
+                                            <div class="detail-value">${
+												user.mobile_no || "-"
+											}</div>
+                                        </div>
+                                        <div class="user-detail-row">
+                                            <div class="detail-label">${__("Created On")}</div>
+                                            <div class="detail-value">${
+												frappe.datetime.str_to_user(user.creation) || "-"
+											}</div>
+                                        </div>
+                                        <div class="user-detail-row">
+                                            <div class="detail-label">${__("Last Login")}</div>
+                                            <div class="detail-value">${
+												user.last_login
+													? frappe.datetime.str_to_user(user.last_login)
+													: "-"
+											}</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="user-details-section">
+                                        <h4>${__("Roles")}</h4>
+                                        <div class="user-roles-container">
+                                            ${rolesHTML || __("No roles assigned")}
+                                        </div>
+                                    </div>
+                                </div>
+                            `,
 							},
 						],
 						primary_action_label: __("Edit User"),
@@ -426,89 +509,106 @@ class UserManager {
 	showEditUserDialog(user) {
 		const me = this;
 
-		// Get role profiles for the dropdown
-		this.getRoleProfiles().then((profiles) => {
-			const roleOptions = profiles.map((p) => ({
-				label: p.role_profile,
-				value: p.name,
-			}));
+		// Define the specific CRM roles we want to use
+		const crmRoles = [
+			"CRM Admin",
+			"CRM Manager",
+			"CRM Team Leader",
+			"CRM Sales",
+			"CRM Reception",
+		];
 
-			// Create the dialog
-			const dialog = new frappe.ui.Dialog({
-				title: __("Edit User"),
-				fields: [
-					{
-						fieldtype: "Section Break",
-						label: __("User Information"),
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "email",
-						label: __("Email"),
-						read_only: 1,
-						default: user.name,
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "new_password",
-						label: __("New Password"),
-						toggle_password: true,
-					},
-					{
-						fieldtype: "Section Break",
-						label: __("User Details"),
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "first_name",
-						label: __("First Name"),
-						reqd: 1,
-						default: user.first_name,
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "last_name",
-						label: __("Last Name"),
-						reqd: 1,
-						default: user.last_name,
-					},
-					{
-						fieldtype: "Column Break",
-					},
-					{
-						fieldtype: "Data",
-						fieldname: "mobile_no",
-						label: __("Mobile No"),
-						default: user.mobile_no,
-					},
-					{
-						fieldtype: "Select",
-						fieldname: "role_profile",
-						label: __("Role Profile"),
-						options: roleOptions,
-						default: user.role_profile_name,
-					},
-					{
-						fieldtype: "Section Break",
-						label: __("Profile Image"),
-					},
-					{
-						fieldtype: "Attach Image",
-						fieldname: "user_image",
-						label: __("User Image"),
-						description: __("Max file size: 2MB"),
-						default: user.user_image || "",
-					},
-				],
-				primary_action_label: __("Update User"),
-				primary_action: (values) => {
-					dialog.hide();
-					me.updateUser(user.name, values);
+		// Find the user's current CRM role (if any)
+		let currentRole = "";
+		if (user.roles && user.roles.length) {
+			for (let roleObj of user.roles) {
+				if (crmRoles.includes(roleObj.role)) {
+					currentRole = roleObj.role;
+					break; // Take the first matching CRM role
+				}
+			}
+		}
+
+		// Create the dialog
+		const dialog = new frappe.ui.Dialog({
+			title: __("Edit User"),
+			fields: [
+				{
+					fieldtype: "Section Break",
+					label: __("User Information"),
 				},
-			});
-
-			dialog.show();
+				{
+					fieldtype: "Data",
+					fieldname: "email",
+					label: __("Email"),
+					read_only: 1,
+					default: user.name,
+				},
+				{
+					fieldtype: "Data",
+					fieldname: "new_password",
+					label: __("New Password"),
+					toggle_password: true,
+				},
+				{
+					fieldtype: "Section Break",
+					label: __("User Details"),
+				},
+				{
+					fieldtype: "Data",
+					fieldname: "first_name",
+					label: __("First Name"),
+					reqd: 1,
+					default: user.first_name,
+				},
+				{
+					fieldtype: "Data",
+					fieldname: "last_name",
+					label: __("Last Name"),
+					reqd: 1,
+					default: user.last_name,
+				},
+				{
+					fieldtype: "Column Break",
+				},
+				{
+					fieldtype: "Data",
+					fieldname: "mobile_no",
+					label: __("Mobile No"),
+					default: user.mobile_no,
+				},
+				{
+					fieldtype: "Section Break",
+					label: __("User Role"),
+				},
+				{
+					fieldtype: "Select",
+					fieldname: "role",
+					label: __("Role"),
+					options: crmRoles,
+					default: currentRole,
+					reqd: 1,
+				},
+				{
+					fieldtype: "Section Break",
+					label: __("Profile Image"),
+				},
+				{
+					fieldtype: "Attach Image",
+					fieldname: "user_image",
+					label: __("User Image"),
+					description: __("Max file size: 2MB"),
+					default: user.user_image || "",
+				},
+			],
+			primary_action_label: __("Update User"),
+			primary_action: (values) => {
+				dialog.hide();
+				me.updateUser(user.name, values);
+			},
 		});
+
+		dialog.show();
 	}
 
 	createUser(values) {
@@ -522,14 +622,19 @@ class UserManager {
 					email: values.email,
 					first_name: values.first_name,
 					last_name: values.last_name,
+					mobile_no: values.mobile_no || "",
 					enabled: 1,
-					role_profile_name: values.role_profile,
 					module_profile: "CRM",
 					send_welcome_email: 0,
 					timezone: "Asia/Dubai",
 					new_password: values.new_password,
 					default_app: "crm",
 					user_image: values.user_image || null,
+					roles: [
+						{
+							role: values.role,
+						},
+					],
 				},
 			},
 			callback: function (r) {
@@ -546,33 +651,58 @@ class UserManager {
 
 	updateUser(userName, values) {
 		const me = this;
-		const updateData = {
-			first_name: values.first_name,
-			last_name: values.last_name,
-			mobile_no: values.mobile_no,
-			role_profile_name: values.role_profile,
-			user_image: values.user_image || null,
-		};
 
-		// Only include password if it was provided
-		if (values.new_password) {
-			updateData.new_password = values.new_password;
-		}
-
+		// Call API to update basic user details
 		frappe.call({
 			method: "frappe.client.set_value",
 			args: {
 				doctype: "User",
 				name: userName,
-				fieldname: updateData,
+				fieldname: {
+					first_name: values.first_name,
+					last_name: values.last_name,
+					mobile_no: values.mobile_no,
+					user_image: values.user_image || null,
+					new_password: values.new_password || "",
+				},
 			},
 			callback: function (r) {
 				if (r.message) {
-					frappe.show_alert({
-						message: __("User updated successfully"),
-						indicator: "green",
+					// Now update the role
+					frappe.call({
+						method: "frappe.client.get",
+						args: {
+							doctype: "User",
+							name: userName,
+						},
+						callback: function (r) {
+							if (r.message) {
+								let userDoc = r.message;
+
+								// Replace all roles with just the selected one
+								userDoc.roles = [
+									{
+										role: values.role,
+									},
+								];
+
+								// Save the updated user
+								frappe.call({
+									method: "frappe.client.save",
+									args: {
+										doc: userDoc,
+									},
+									callback: function () {
+										frappe.show_alert({
+											message: __("User updated successfully"),
+											indicator: "green",
+										});
+										me.refreshUserList();
+									},
+								});
+							}
+						},
 					});
-					me.refreshUserList();
 				}
 			},
 		});
@@ -645,13 +775,46 @@ class UserManager {
 						"role_profile_name",
 						"last_active",
 						"last_login",
-						"roles",
 					],
 					limit: 100,
 					order_by: "creation desc",
 				},
 				callback: function (r) {
-					resolve(r.message || []);
+					// Get detailed user info for each user to access roles
+					const users = r.message || [];
+
+					if (users.length === 0) {
+						resolve([]);
+						return;
+					}
+
+					// Create a counter to track completion
+					let completedCount = 0;
+
+					// For each user, get their full document to access roles
+					users.forEach((user, index) => {
+						frappe.call({
+							method: "frappe.client.get",
+							args: {
+								doctype: "User",
+								name: user.name,
+							},
+							callback: function (r) {
+								if (r.message) {
+									// Copy roles from the full document
+									users[index].roles = r.message.roles || [];
+								}
+
+								// Increment counter
+								completedCount++;
+
+								// If all users processed, resolve
+								if (completedCount === users.length) {
+									resolve(users);
+								}
+							},
+						});
+					});
 				},
 			});
 		});
@@ -984,14 +1147,83 @@ frappe.pages["crm-user-manager"].on_page_show = function () {
             }
             
             .user-role-badge {
-                display: inline-block;
-                padding: 3px 8px;
-                margin: 0 5px 5px 0;
-                border-radius: 10px;
-                font-size: 11px;
-                background-color: var(--control-bg);
-                color: var(--text-color);
-            }
+    display: inline-block;
+    padding: 3px 8px;
+    margin-top: 5px;
+    border-radius: 10px;
+    font-size: 11px;
+    background-color: var(--blue-100);
+    color: var(--blue-700);
+}
+.user-role-badge.user-role-none {
+    background-color: var(--gray-200);
+    color: var(--gray-600);
+}
+
+/* Add different colors for different roles */
+.user-role-badge.role-crm-admin {
+    background-color: var(--red-100);
+    color: var(--red-700);
+}
+.user-role-badge.role-crm-manager {
+    background-color: var(--purple-100);
+    color: var(--purple-700);
+}
+.user-role-badge.role-crm-team-leader {
+    background-color: var(--orange-100);
+    color: var(--orange-700);
+}
+.user-role-badge.role-crm-sales {
+    background-color: var(--green-100);
+    color: var(--green-700);
+}
+.user-role-badge.role-crm-reception {
+    background-color: var(--yellow-100);
+    color: var(--yellow-700);
+}
+	/* Dialog role styles */
+.dialog-role-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    background-color: var(--blue-100);
+    color: var(--blue-700);
+}
+
+.user-primary-role {
+    margin-bottom: 15px;
+}
+
+.other-roles-label {
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* Role badge colors in dialog */
+.dialog-role-badge.role-crm-admin {
+    background-color: var(--red-100);
+    color: var(--red-700);
+}
+.dialog-role-badge.role-crm-manager {
+    background-color: var(--purple-100);
+    color: var(--purple-700);
+}
+.dialog-role-badge.role-crm-team-leader {
+    background-color: var(--orange-100);
+    color: var(--orange-700);
+}
+.dialog-role-badge.role-crm-sales {
+    background-color: var(--green-100);
+    color: var(--green-700);
+}
+.dialog-role-badge.role-crm-reception {
+    background-color: var(--yellow-100);
+    color: var(--yellow-700);
+}
         `;
 		document.head.appendChild(style);
 	}
