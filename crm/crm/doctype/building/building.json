@@ -20,7 +20,6 @@
    "fieldname": "building_id",
    "fieldtype": "Data",
    "label": "Building ID",
-   "unique": 1
   },
   {
    "fieldname": "column_break_gror",
